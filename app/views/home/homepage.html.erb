@@ -1,1 +1,85 @@
-<h1>Welcome to homepage</h1>
+<div class="page-header">
+<div class="jumbotron">
+  <h1>Welcome</h1>
+  <p>to Project Tile. This is only a test</p>
+  <p><a class="btn btn-primary btn-lg" href="#" role="button">Start now</a></p>
+</div>
+</div>
+
+<div>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    Nuove Richieste Scelte per Te
+  </div>
+  <div class="panel-body">
+
+
+<div class="row">
+
+<% @works.each do |work| %>
+  <div class="col-xs-6 col-md-3">
+    <div class="thumbnail">
+      <div id="carousel_<%=work.id%>" class="carousel slide" data-ride="carousel">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+        <% @count = 0 %>  
+        <% work.pictures.each do |picture| %>  
+          <% if @count == 0 %>
+            <div class="item active" style=" width:100%; height: 160px !important;">
+          <% else %>
+            <div class="item" style=" width:100%; height: 160px !important;">
+          <% end %>
+                <img src="<%= picture.image.url %>" style=" width:100%; height: 160px !important;" alt="...">
+                <div class="carousel-caption">
+                </div>
+            </div>
+          <% @count += 1 %>
+        <% end %>
+        
+        <% if @count == 0 %>  <!-- if no image was uploaded -->
+         <div class="item active" style=" width:100%; height: 160px !important;">
+            <img src="../assets/idraulico.jpg" alt="..." style=" width:100%; height: 160px !important;">
+            <div class="carousel-caption">
+            </div>
+          </div>
+        <% end %>
+          
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel_<%=work.id%>" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        
+        <a class="right carousel-control" href="#carousel_<%=work.id%>" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+  
+      </div>
+      
+     <!-- <img src="../assets/idraulico.jpg" alt="...">  -->
+      <div class="caption">
+        <h3><%= work.title %></h3>
+        <p><%= truncateHTMLString(work.description).html_safe %></p>
+        <% @price = getCurrentPriceForWork(work) %>
+        <% if @price.to_f > 0.0 %>
+          <h6><b>Al momento: <%= getCurrentPriceForWork(work) %>€</b></h6>
+        <% else %>
+          <h6><b>Fai un'offerta ora!</b></h6>
+        <% end %>
+        <h6><%= work.location %></h6>
+        <p><a href=<%= work_path(work) %> class="btn btn-primary" role="button">More</a></p>
+      </div>
+    </div>
+  </div>
+<% end %>  
+  
+</div>
+
+</div>   <!-- PanelBody -->
+
+</div>

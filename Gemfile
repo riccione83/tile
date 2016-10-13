@@ -39,6 +39,11 @@ gem 'mini_magick'
 gem 'will_paginate', '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
 gem 'net-ssh'
+gem 'devise'  #user
+gem 'ckeditor', github: 'galetahub/ckeditor' #for text editor
+gem 'truncate_html','0.3.2'
+gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
