@@ -51,7 +51,8 @@ class WorksController < ApplicationController
   
   def new_bid
     #byebug
-    if params[:new_price].to_f >= getCurrentPriceForWork(@work).to_f
+    current_price = getCurrentPriceForWork(@work).to_f
+    if params[:new_price].to_f >= current_price and current_price > 0.0
       flash[:notice] = "Devi fare un'offerta minore di " + getCurrentPriceForWork(@work) + "€"
       redirect_to(work_path(@work))
     else
@@ -71,7 +72,6 @@ class WorksController < ApplicationController
       redirect_to(work_path(@work))
     end
   end
-  
 
   # POST /works
   # POST /works.json

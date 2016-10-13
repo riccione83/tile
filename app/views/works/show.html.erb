@@ -2,34 +2,10 @@
 
 <p id="notice"><%= notice %></p>
 
+
+<div class="im-centered">
+  
  <div class="row">
-   
-   <div class="col-md-3">
-      <p>
-        <strong>From:</strong>
-        <%= @work.user.email %>
-      </p>
-      
-      <p>
-        <strong>Titolo:</strong>
-        <%= @work.title %>
-      </p>
-      
-      <p>
-        <strong>Description:</strong>
-        <%= @work.description.html_safe %>
-      </p>
-      
-      <p>
-        <strong>Ultima offerta:</strong>
-        <%= @price %>
-      </p>
-      
-      <p>
-        <strong>Location:</strong>
-        <%= @work.location %>
-      </p>
-    </div> <!-- md-3 -->
    
    <div class="col-md-6">
      
@@ -73,17 +49,53 @@
         </a>
   
       </div>
+      <br>
     </div> <!-- md-9 -->
-
+  
+  <% @price = getCurrentPriceForWork(@work) %>
    <div class="col-md-3">
     <form method="post" action=<%=new_bid_path(@work)%> class="rcorners6">
-      <b>Fai un'offerta</b><br>(meno di <%=getCurrentPriceForWork(@work)%>)<br>
+      <% if @price.to_f == 0.0 %>
+        <b>Fai un'offera per primo!<br>
+      <% else %>
+        <b>Fai un'offerta</b><br>(meno di <%= @price %>)<br>
+      <% end %>
       <input type="text" name="new_price" class="form-control"><br>
       <input type="submit" name="submit" value="Invia i dati">
     </form>
   </div>
 
 </div> <!-- ROW -->
+
+</div> <!-- im-centered -->
+
+<hr>
+
+      <p>
+        <strong>From:</strong>
+        <%= @work.user.email %>
+      </p>
+      
+      <p>
+        <strong>Titolo:</strong>
+        <%= @work.title %>
+      </p>
+      
+      <p>
+        <strong>Description:</strong>
+        <%= @work.description.html_safe %>
+      </p>
+      
+      <p>
+        <strong>Ultima offerta:</strong>
+        <%= @price %>
+      </p>
+      
+      <p>
+        <strong>Location:</strong>
+        <%= @work.location %>
+      </p>
+
 
 <hr>
 
