@@ -1,5 +1,6 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
+    
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -25,7 +26,11 @@
       </form>
       
       <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to 'Home', root_path %></li>
+          <li role="presentation"><a href="#">Vicino a te</a></li>
+          <li role="presentation"><a href="#">Categorie</a></li>
           <% if user_signed_in? %>
+            <li><%= link_to 'Nuovo annuncio', new_work_path %></li>
             <li><%= link_to 'Le mie richieste', works_path %></li>
           <% end %>
           <% if !user_signed_in? %>
@@ -35,16 +40,14 @@
            <li><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
           <% end %>
       </ul>
-
+  
     </div><!-- /.navbar-collapse -->
+    
+    
   </div><!-- /.container-fluid -->
 
-  <ul class="nav nav-pills nav-justified">
-  <li role="presentation"><a href=<%= root_path %>>Home</a></li>
-  <li role="presentation"><a href="#">Vicino a te</a></li>
-  <li role="presentation"><a href="#">Categorie</a></li>
-  <li role="presentation"><a href=<%= new_work_path %> >Nuovo annuncio</a></li>  
-</ul>
+<!--  
+-->
 
 </nav>
 

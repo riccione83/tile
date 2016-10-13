@@ -33,18 +33,18 @@
    
    <div class="col-md-6">
      
-      <div id="carousel_<%=@work.id%>" class="carousel slide" data-ride="carousel" style=" width:500px; height: 400px !important;">
+      <div id="carousel_<%=@work.id%>" class="carousel slide imageThumbWorkShow" data-ride="carousel">
         <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox" style=" width:500px; height: 400px !important;">
+        <div class="carousel-inner imageThumbWorkShow" role="listbox">
         <% @count = 0 %>  
         
         <% @work.pictures.each do |picture| %>  
           <% if @count == 0 %>
-            <div class="item active" style=" width:500px; height: 400px !important;">
+            <div class="item active imageThumbWorkShow">
           <% else %>
-            <div class="item" style=" width: 500px; height: 400px !important;">
+            <div class="item imageThumbWorkShow">
           <% end %>
-                <img src="<%= picture.image.url %>" alt="..." style=" width: 500px; height: 400px !important;">
+                <img src="<%= picture.image.url %>" alt="..." class="imageThumbWorkShow">
                 <div class="carousel-caption">
                 </div>
             </div>
@@ -53,7 +53,7 @@
         
         <% if @count == 0 %>  <!-- if no image was uploaded -->
          <div class="item active">
-            <img src="../assets/idraulico.jpg" style=" width:500px; height: 400px !important;">
+            <img src="../assets/idraulico.jpg" class="imageThumbWorkShow">
             <div class="carousel-caption">
             </div>
           </div>
@@ -62,12 +62,12 @@
         </div>
 
         <!-- Controls -->
-        <a class="left carousel-control" href="#carousel_<%=@work.id%>" role="button" data-slide="prev">
+        <a class="left carousel-control imageThumbWorkShow" href="#carousel_<%=@work.id%>" role="button" data-slide="prev">
           <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
         </a>
         
-        <a class="right carousel-control" href="#carousel_<%=@work.id%>" role="button" data-slide="next">
+        <a class="right carousel-control imageThumbWorkShow" href="#carousel_<%=@work.id%>" role="button" data-slide="next">
           <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </a>
