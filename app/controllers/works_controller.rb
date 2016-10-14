@@ -3,16 +3,26 @@ class WorksController < ApplicationController
   
   skip_before_action :verify_authenticity_token, only: [:new_bid]
   
-  before_action :check_user_login
-  before_action :set_work, only: [:show, :edit, :update, :destroy, :follow, :new_bid]
-
+  before_action :check_user_login, except: [:list]
+  before_action :set_work, only: [:show, :edit, :update, :destroy, :follow, :new_bid], except: [:list]
 
   def check_user_login
-  
     if !user_signed_in?
       redirect_to(root_path)
     end
-  
+  end
+
+  def list
+     if params[:search] and params[:search] != ""
+       	 # byebug
+       	  if (params[:where] == "0" or params[:where] == "1")
+            @works = Work.search(params[:search]).order("created_at DESC")  
+          else
+            @works = Work.search_with_place(params[:search],params[:where]).order("created_at DESC") if params[:where] != "0" and params[:where] != "1"
+          end
+     else
+          @works = Work.all
+     end
   end
 
   # GET /works
@@ -57,18 +67,22 @@ class WorksController < ApplicationController
       redirect_to(work_path(@work))
     else
       #byebug
-      if @bid = @work.prices.all.where(:user_id => current_user.id).last
-        if params[:new_price].to_f > 0.0
-          @bid.price = params[:new_price]
-          @bid.save!
-        else
-          flash[:notice] = "Hai già fatto offerte, già segui la gara."
-          redirect_to(work_path(@work))
-        end
+      if @work.user_id == current_user.id
+         flash[:notice] = "Non puoi fare offerte ai tuoi annunci."
       else
-        @work.prices.create(:user_id => current_user.id, :price =>params[:new_price])
+        if @bid = @work.prices.all.where(:user_id => current_user.id).last
+          if params[:new_price].to_f > 0.0
+            @bid.price = params[:new_price]
+            @bid.save!
+          else
+            flash[:notice] = "Hai già fatto offerte, già segui la gara."
+            redirect_to(work_path(@work))
+          end
+        else
+          @work.prices.create(:user_id => current_user.id, :price =>params[:new_price])
+        end
+        @work.save!
       end
-      @work.save!
       redirect_to(work_path(@work))
     end
   end
@@ -131,12 +145,14 @@ class WorksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_work
-      @work = Work.find(params[:id])
-      @price = @work.prices.where("price > ?", 0).order('price asc').first
-      if @price == nil
-        @price = "No offer"
-      else
-        @price = @price.price
+      if params[:id]
+          @work = Work.find(params[:id]) 
+          @price = @work.prices.where("price > ?", 0).order('price asc').first
+          if @price == nil
+            @price = "No offer"
+          else
+            @price = @price.price
+          end
       end
     end
 

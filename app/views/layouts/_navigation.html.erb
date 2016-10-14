@@ -15,19 +15,19 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-      <form class="navbar-form navbar-left">
+      <div class="navbar-form navbar-left">
          
         <div class="form-group">
-             <%= form_tag('home#homepage', :method => "get", id: "search-form") do %>
+             <%= form_tag(list_path, :method => "get", id: "search-form") do %>
                 <%= text_field_tag :search, params[:search], placeholder: "Cerca un Cliente Adesso", class: "form-control" %> 
-                <%= submit_tag "Cerca", class:"form-control" %>
+                <%= submit_tag "Cerca" %>
              <% end %>
         </div>
-      </form>
+      </div>
       
       <ul class="nav navbar-nav navbar-right">
           <li><%= link_to 'Home', root_path %></li>
-          <li role="presentation"><a href="#">Vicino a te</a></li>
+          <li><%= link_to 'Vicino a te', list_path %></li>
           <li role="presentation"><a href="#">Categorie</a></li>
           <% if user_signed_in? %>
             <li><%= link_to 'Nuovo annuncio', new_work_path %></li>

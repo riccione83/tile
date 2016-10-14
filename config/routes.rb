@@ -10,10 +10,12 @@ Rails.application.routes.draw do
   root to: 'home#homepage'
   
   resources :home
+  resources :works
   
   get 'home', :to => "home#homepage"
   post '/works/:id/new_bid', :to => "works#new_bid", :as => "new_bid"
   get '/works/:id/follow', :to => "works#follow", :as => "work_follow"
+  get '/list', :to => "works#list", :as => "list"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
