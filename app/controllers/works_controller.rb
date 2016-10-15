@@ -25,6 +25,8 @@ class WorksController < ApplicationController
      end
   end
 
+  
+  
   # GET /works
   # GET /works.json
   def index
@@ -34,7 +36,10 @@ class WorksController < ApplicationController
   # GET /works/1
   # GET /works/1.json
   def show
+    @works = Work.all
     @bids = @work.prices.all
+    @recomends = WorkRecommender.new(@work,@works).recommendations(@work.id)
+   # redirect_to @work.paypal_url(work_path(@work))
   end
 
   # GET /works/new

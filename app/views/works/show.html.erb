@@ -130,4 +130,29 @@
   </tbody>
 </table>
 
+<hr>
+<h3>Consigliati per te [** BETA **]</h3>
+
+<table class="table table-responsive table-hover">
+  <thead>
+    <tr>
+      <th>Titolo</th>
+      <th>Description</th>
+      <th>Jaccard index</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recomends.each do |work| %>
+     <% if work.jaccard_index > 0 %>
+      <tr>
+        <td><%= work.title %></td>
+        <td><%= truncateHTMLString(work.description,20).html_safe %></td>
+        <td><%='%.2f' % work.jaccard_index %></td>
+      </tr>
+     <% end %>
+    <% end %>
+  </tbody>
+</table>
+
 </div>
