@@ -60,9 +60,20 @@ module ApplicationHelper
                     "  <option value='Ragusa' >Ragusa</option>",
                     "  <option value='Siracusa' >Siracusa</option>",
                     "  <option value='Trapani' >Trapani</option>"]
-      
-      
     end
   
+    def reg
+      
+      return       ["Sicilia",
+                    "Agrigento",
+                    "Caltanissetta",
+                    "Catania",
+                    "Enna",
+                    "Messina",
+                    "Palermo",
+                    "Ragusa",
+                    "Siracusa",
+                    "Trapani"]
+    end  
   
 end  

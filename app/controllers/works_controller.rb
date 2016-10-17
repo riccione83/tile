@@ -1,5 +1,6 @@
 class WorksController < ApplicationController
   include ApplicationHelper
+
   
   skip_before_action :verify_authenticity_token, only: [:new_bid]
   
@@ -39,6 +40,7 @@ class WorksController < ApplicationController
     @works = Work.all
     @bids = @work.prices.all
     @recomends = WorkRecommender.new(@work,@works).recommendations(@work.id)
+
    # redirect_to @work.paypal_url(work_path(@work))
   end
 

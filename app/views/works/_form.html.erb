@@ -15,34 +15,33 @@
    <%= f.hidden_field :user_id, :value => current_user.id %>
 
   <div class="field">
-    <%= f.label :title %><br>
+    <%= f.label "Titolo descrittivo" %><br>
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
+    <%= f.label "Descrizione dei lavori" %><br>
     <%= f.cktext_area :description %>
   </div>
+
+
   <div class="field">
-    <%= f.label :price_id %><br>
-    <%= f.number_field :price_id %>
+    <%= f.label "Città" %><br>
+    <%= f.collection_select :location, reg, :to_s, :to_s, include_blank: false %>
   </div>
-  <div class="field">
-    <%= f.label :location %><br>
-    <%= f.text_field :location %>
-  </div>
+  
   
   <div class="field">
   <div class="control-group">
-    <%= f.label :pictures, class: 'control-label' %>
+    <%= f.label "Inserisci le eventuali foto", class: 'control-label' %>
     <div class="controls">
       <%= file_field_tag "images[]", type: :file, multiple: true %>
     </div>
   </div>
   </div>
-  
+  <hr>
   <% if current_user.id == @work.user_id || @work.new_record? %>
     <div class="actions">
-      <%= f.submit  %>
+      <%= f.submit "Invia" %>
     </div>
   <% end %>
 <% end %>
