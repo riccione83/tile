@@ -23,7 +23,7 @@
         <div class="form-group">
                <label for="searcharea">Dove?</label>
                    <select name="where" id="searcharea" class="form-control" style="width: 140px;">
-                      <% regioni.each do |regione| %>
+                      <% regioni_html.each do |regione| %>
                            <%= regione.html_safe %>
                       <% end %>
                    </select>

@@ -74,6 +74,8 @@ GEM
       json (>= 1.7)
       mime-types (>= 1.16)
       mimemagic (>= 0.3.0)
+    classifier-reborn (2.0.4)
+      fast-stemmer (~> 1.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.8)
@@ -96,6 +98,7 @@ GEM
     erubis (2.7.0)
     excon (0.53.0)
     execjs (2.7.0)
+    fast-stemmer (1.0.2)
     fog (1.23.0)
       fog-brightbox
       fog-core (~> 1.23)
@@ -237,8 +240,10 @@ DEPENDENCIES
   byebug
   carrierwave
   ckeditor!
+  classifier-reborn
   coffee-rails (~> 4.1.0)
   devise
+  fast-stemmer
   fog (= 1.23.0)
   geocoder
   gmaps4rails

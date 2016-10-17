@@ -47,7 +47,7 @@ module ApplicationHelper
     end
     
     
-    def regioni
+    def regioni_html
       
       return       ["  <option value='0' selected='selected'>Sicilia</option> ",
                     "  <option value='1' disabled='disabled'>-- LE PROVINCE --</option>",
@@ -62,7 +62,7 @@ module ApplicationHelper
                     "  <option value='Trapani' >Trapani</option>"]
     end
   
-    def reg
+    def regioni
       
       return       ["Sicilia",
                     "Agrigento",
