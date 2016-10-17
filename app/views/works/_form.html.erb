@@ -40,7 +40,7 @@
   </div>
   </div>
   
-  <% if current_user.id == @work.user_id %>
+  <% if current_user.id == @work.user_id || @work.new_record? %>
     <div class="actions">
       <%= f.submit  %>
     </div>
