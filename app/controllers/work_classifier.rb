@@ -5,7 +5,7 @@ require 'classifier-reborn'
   @@training_set_file = File.join(Rails.root, 'db', 'training_data.txt')
 
   def initialize
-      byebug    
+
       if File.exist?(@@classifier_file)
             # This is now saved to a file, and you can safely restart the application
              data = File.open(@@classifier_file, 'rb').read
@@ -16,7 +16,7 @@ require 'classifier-reborn'
   end
   
   def save
-    byebug
+
       classifier_snapshot = Marshal.dump @classifier
       # This is a string of bytes, you can persist it anywhere you like
   
@@ -25,7 +25,7 @@ require 'classifier-reborn'
   end
  
   def train 
-    byebug
+
      # This is now saved to a file, and you can safely restart the application
         data = File.read ( @@training_set_file )
         training_set = data.split("\n")
@@ -47,7 +47,7 @@ require 'classifier-reborn'
  # fail 'Trained string can only be encoded as UTF8' if data.encoding != 'UTF8' 
  
   def classifier_test()
-      byebug
+
         puts @classifier.classify "I hate bad words and you" #=> 'Uninteresting'
         puts @classifier.classify "I hate javascript" #=> 'Uninteresting'
         puts @classifier.classify "javascript is bad" #=> 'Uninteresting'

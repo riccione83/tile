@@ -14,6 +14,9 @@ class WorksController < ApplicationController
   end
 
   def list
+     @work_classifier = WorkClassifier.new
+     @work_classifier.train
+     @work_classifier.classifier_test
      if params[:search] and params[:search] != ""
        	 # byebug
        	  if (params[:where] == "0" or params[:where] == "1")
