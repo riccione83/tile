@@ -14,23 +14,12 @@ class Work < ActiveRecord::Base
 			       lower(location) LIKE '%#{place.downcase}%' ")
 	end
 	
+	def self.search_by_category(category)
+			where("(lower(categories) LIKE '%#{category.downcase}%')")
+	end
+	
 	def words
     	@words ||= self.description.gsub(/[a-zA-Z]{3,}/).map(&:downcase).uniq.sort
 	end
 	
-	def paypal_url(return_path)
-    values = {
-        business: "merchant@gotealeaf.com",
-        cmd: "_xclick",
-        upload: 1,
-        return: "#{Rails.application.secrets.app_host}#{return_path}",
-        invoice: id,
-        amount: work.price,
-        item_name: work.title,
-        item_number: work.id,
-        quantity: '1'
-    }
-    "#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?" + values.to_query
-	end
-  
 end

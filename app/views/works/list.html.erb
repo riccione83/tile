@@ -51,7 +51,7 @@
               <th>Description</th>
               <th>Price</th>
               <th>Location</th>
-
+              <th>Categoria</th>
               <th colspan="2"></th>
             </tr>
           </thead>
@@ -68,10 +68,10 @@
                 <td><%= truncateHTMLString(work.description,200).html_safe %></td>
                 <td><%= work.price_id %></td>
                 <td><%= work.location %></td>
-                <td><%= @work_classifier.classify ActionView::Base.full_sanitizer.sanitize(work.description).delete!("\r\n\t") %></td>
+                <td><%= $work_classifier.classify ActionView::Base.full_sanitizer.sanitize(work.description).delete!("\r\n\t") %></td>
                 <td><%= link_to 'Guarda', work %></td>
                 <td><%= link_to 'Segui',  work_follow_path(work) %></td>
-              </tr>
+            </tr>
             <% end %>
           </tbody>
         </table>

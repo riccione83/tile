@@ -28,8 +28,8 @@
       <ul class="nav navbar-nav navbar-right">
           <li><%= link_to 'Home', root_path %></li>
           <li><%= link_to 'Vicino a te', list_path %></li>
-          <li role="presentation"><a href="#">Categorie</a></li>
-          <% if user_signed_in? %>
+          <li><%= link_to 'Categorie', categories_path %></li>
+           <% if user_signed_in? %>
             <li><%= link_to 'Nuovo annuncio', new_work_path %></li>
             <li><%= link_to 'Le mie richieste', works_path %></li>
           <% end %>

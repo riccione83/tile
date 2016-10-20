@@ -1,4 +1,4 @@
-Auto, MotoScooter
+Auto, Moto
 # 
 # 
 # Interesting, Uninteresting
@@ -9,15 +9,8 @@ auto: cerco meccanico per la mia auto
 auto: cerco qualcuno che possa dipingere la mia vettura
 auto: ho bisogno di colorare la mia auto
 
-MotoScooter: motorino nuovo
-MotoScooter: scooter rotto
-MotoScooter: gommista per il mio motorino
-MotoScooter: carrozziere per il mio scooter
-
-interesting: here are some good words. I hope you love them
-interesting: all you need is love
-interesting: the love boat, soon we will be taking another ride
-interesting: ruby don't take your love to town
+Moto: gommista per il mio motorino
+Moto: carrozziere per il mio scooter
 
 informatica: cerco tecnico che possa aggiustare il mio computer
 informatica: Persona capace con i PC che possa formattare i miei computers
@@ -27,23 +20,4 @@ informatica: Assemblatore di computer o PC
 informatica: Necessito di tecnico per formattare il mio PC.Ho bisogno di liberare lo spazione nell' Hark Disk. Solo diplomati in informatica
 informatica: Salve,ho bisogno di un tecnico informatico per la sistemazione del mio PC.Il mio numero di telefono è 3258789563 Tabella del materiale da utilizzare RAM Processore Hard Disk Case
 
-giardinaggio: Qualcuno in zona che potrebbe sistemarmi il giardino? Ho bisogno di potare le piante.
-
-uninteresting: here are some bad words, I hate you
-uninteresting: bad bad leroy brown badest man in the darn town
-uninteresting: the good the bad and the ugly
-uninteresting: java, javascript, css front-end html
-
-#
-# train categories that were not pre-described
-#
-dog: dog days of summer
-dog: a man's best friend is his dog
-dog: a good hunting dog is a fine thing
-dog: man my dogs are tired
-dog: dogs are better than cats in soooo many ways
-
-cat: the fuzz ball spilt the milk
-cat: got rats or mice get a cat to kill them
-cat: cats never come when you call them
-cat: That dang cat keeps scratching the furniture
+giardino: Qualcuno in zona che potrebbe sistemarmi il giardino? Ho bisogno di potare le piante.

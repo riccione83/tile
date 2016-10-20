@@ -29,6 +29,10 @@
     <%= f.collection_select :location, regioni, :to_s, :to_s, include_blank: false %>
   </div>
   
+  <div class="field">
+    <%= f.label "Categoria" %><br>
+    <%= f.collection_select :categories, categories, :to_s, :to_s, include_blank: false %>
+  </div>
   
   <div class="field">
   <div class="control-group">

@@ -67,7 +67,7 @@
 
       <div class="caption">
         <h3><%= work.title %></h3>
-        <p><%= truncateHTMLString(work.description,30).html_safe %></p>
+        <p><%= truncateHTMLString(ActionView::Base.full_sanitizer.sanitize(work.description).delete!("\r\n\t"), 30).html_safe %></p>
         <% @price = getCurrentPriceForWork(work) %>
         <% if @price.to_f > 0.0 %>
           <h6><b>Al momento: <%= getCurrentPriceForWork(work) %>€</b></h6>

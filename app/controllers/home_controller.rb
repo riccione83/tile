@@ -3,6 +3,7 @@ class HomeController < ApplicationController
    
     def homepage
         @works = Work.all
+        $work_classifier.load_classifier
     end
     
     def testpage

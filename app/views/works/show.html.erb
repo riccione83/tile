@@ -2,11 +2,9 @@
 
 <p id="notice"><%= notice %></p>
 
-
-<div class="im-centered">
+<div class="im-centered"> 
   
  <div class="row">
-   
    <div class="col-md-6">
      
       <div id="carousel_<%=@work.id%>" class="carousel slide imageThumbWorkShow" data-ride="carousel">
@@ -56,7 +54,7 @@
    <div class="col-md-3">
     <form method="post" action=<%=new_bid_path(@work)%> class="rcorners6">
       <% if @price.to_f == 0.0 %>
-        <b>Fai un'offera per primo!<br>
+        <b>Fai un'offera per primo!</b><br>
       <% else %>
         <b>Fai un'offerta</b><br>(meno di <%= @price %>)<br>
       <% end %>
@@ -113,6 +111,7 @@
     <tr>
       <th>Utente</th>
       <th>Offerta</th>
+      <th>Azioni</th>
     </tr>
   </thead>
 
@@ -121,9 +120,11 @@
       <tr>
         <td><%= bid.user.email %></td>
         <% if bid.price == 0.0 %>
-           <td>Sta seguendo</td>        
+          <td>Sta seguendo</td>        
+          <td></td>          
         <% else %>
           <td><%= bid.price %></td>
+          <td><%= link_to 'Accetta questa offerta', payments_path(@work) %></td>          
         <% end %>
       </tr>
     <% end %>
@@ -131,7 +132,8 @@
 </table>
 
 <hr>
-<h3>Consigliati per te [** BETA **]</h3>
+
+<h3>Consigliati per te</h3>
 
 <table class="table table-responsive table-hover">
   <thead>
@@ -143,12 +145,12 @@
   </thead>
 
   <tbody>
-    <% @recomends.each do |work| %>
-     <% if work.jaccard_index > 0 %>
+    <% @recomends.each do |_work| %>
+     <% if _work.jaccard_index >= 0.08 %>
       <tr>
-        <td><%= work.title %></td>
-        <td><%= truncateHTMLString(work.description,20).html_safe %></td>
-        <td><%='%.2f' % work.jaccard_index %></td>
+        <td><%= link_to _work.title, _work %> </td>
+        <td><%=  truncateHTMLString(ActionView::Base.full_sanitizer.sanitize(_work.description),20).html_safe %></td>
+        <td><%='%.2f' % _work.jaccard_index %></td>
       </tr>
      <% end %>
     <% end %>

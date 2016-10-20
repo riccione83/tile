@@ -45,7 +45,7 @@ gem 'truncate_html','0.3.2'
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 gem 'classifier-reborn'
 gem 'fast-stemmer'
-
+gem 'paypal-sdk-adaptivepayments'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

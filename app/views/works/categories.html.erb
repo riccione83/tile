@@ -1,0 +1,111 @@
+<p id="notice"><%= notice %></p>
+
+
+<form id="search_form" class="form-inline" name="f" action="/list" method="get" style="text-align: center;">
+    
+             <div class="form-group">
+               <label for="searchtext">Cosa cerchi?</label>
+               <input type="text" class="form-control" name="search" id="search" value="" placeholder="Idraulico, Informatico" autocomplete="off">
+             </div>
+             &nbsp;&nbsp;
+             <div class="form-group">
+               <label for="cat">In quale categoria?</label>
+               <select name="category" id="cat" class="form-control" style="width: 180px;">
+                  <% @cnt_categoria = 0 %>
+                  <% categories.each do |categoria| %>
+                      <option value="<%= categoria %>" ><%= categoria %></option>
+                      <% @cnt_categoria += 1 %>
+                  <% end %>
+               </select>
+         </div>
+         &nbsp;&nbsp;
+         
+        <div class="form-group">
+               <label for="searcharea">Dove?</label>
+                   <select name="where" id="searcharea" class="form-control" style="width: 140px;">
+                      <% regioni_html.each do |regione| %>
+                           <%= regione.html_safe %>
+                      <% end %>
+                   </select>
+         </div>
+         &nbsp;&nbsp;
+         <div class="form-group">
+            <button type="submit"> <span class="glyphicon glyphicon-search"></span></button>
+         </div>
+</form>
+
+<hr>
+
+<% if @works == nil %>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+   Lista delle categorie.
+  </div>
+  <div class="panel-body">
+        <table class="table table-responsive table-hover table-striped">
+          <thead>
+            <tr>
+              <th>Categoria</th>
+            </tr>
+          </thead>
+        
+          <tbody>
+            <% $work_classifier.get_categories.each do |category| %>
+              <tr>
+                <td ><%= link_to category, '/categories?s='+ category %> </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+    </div>
+</div>
+
+
+<% else %>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    Abbiamo trovato per te <b><%= @works.count if @works %></b> annunci.
+  </div>
+  <div class="panel-body">
+        <% if @works %>
+        <table class="table table-responsive table-hover table-striped">
+          <thead>
+            <tr>
+              <th colspan="1"></th>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Location</th>
+              <th>Categoria</th>
+              <th colspan="2"></th>
+            </tr>
+          </thead>
+        
+          <tbody>
+            <% @works.each do |work| %>
+              <tr>
+                <% if  work.pictures.any? %>
+                    <td><img src="<%= work.pictures.first.image.url %>" style="width: 150px;" alt="..."></td>
+                <% else %>
+                    <td>Nessuna foto</td>
+                <% end %>
+                <td><%= work.title %></td>
+                <td><%= truncateHTMLString(work.description,200).html_safe %></td>
+                <td><%= work.price_id %></td>
+                <td><%= work.location %></td>
+                <% @cat =  $work_classifier.classify ActionView::Base.full_sanitizer.sanitize(work.description).delete!("\r\n\t") %>
+                <td><%= @cat %></td>
+                <td><%= link_to 'Guarda', work %></td>
+                <td><%= link_to 'Segui',  work_follow_path(work) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+    <% end %>
+    </div>
+
+
+<% end %>
