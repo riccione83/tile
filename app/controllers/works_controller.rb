@@ -136,7 +136,7 @@ class WorksController < ApplicationController
     @works = Work.all
     if @works.any?
       @bids = @work.prices.all
-      @recomends = WorkRecommender.new(@work,@works).recommendations(@work.id)
+      @recomends = WorkRecommender.new(@work,@works).recommendations(@work.id).first(2)
     end
 
    # redirect_to @work.paypal_url(work_path(@work))

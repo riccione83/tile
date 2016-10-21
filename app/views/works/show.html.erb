@@ -1,12 +1,14 @@
 
-<div class="panel panel-default" id="leftbox" style="margin-top:30px;">
+<div class="panel panel-default" id="leftbox" style="margin-top:30px; ">
   <div class="panel-heading">Consigliati per te</div>
   <div class="panel-body">
 
+<% @recomend_cnt = 0 %>
 <table class="table table-responsive table-hover">
   <tbody>
     <% @recomends.each do |_work| %>
      <% if _work.jaccard_index >= 0.08 %>
+     <% @recomend_cnt = @recomend_cnt + 1 %>
       <tr>
         <td><small><%= link_to _work.title, _work %></small> </td>
         <td><small><%='%.2f' % _work.jaccard_index %></small></td>
@@ -18,29 +20,25 @@
 </div>
 </div>
 
-<div id="rightbox" style="margin-top:30px;">
   <% @price = getCurrentPriceForWork(@work) %>
-   <div class="col-md-3">
-    <form method="post" action=<%=new_bid_path(@work)%> class="rcorners6">
+    <form method="post" action=<%=new_bid_path(@work)%> id="rcorners6">
       <% if @price.to_f == 0.0 %>
         <b>Fai un'offera per primo!</b><br>
       <% else %>
         <b>Fai un'offerta</b><br>(la più bassa <%= @price %>€)<br>
       <% end %>
-      <input type="text" name="new_price" class="form-control">
-      <button type="submit" class="btn btn-default glyphicon glyphicon-flash">Invia</button>
+      <input type="text" name="new_price" class="form-control"><button type="submit" class="btn btn-default glyphicon glyphicon-flash">Invia</button>
     </form>
+
+<% for i in 0..(@recomend_cnt/2) do%>
+  <div class="spacer">
+      &nbsp;
   </div>
-</div>
+<% end %>
 
-
-<div class="container">
 
 <div class= "container" style="margin-top:20px;">
-
 <p id="notice"><%= notice %></p>
-
-
 <div class="im-centered"> 
   
  <div class="row">
@@ -55,11 +53,9 @@
           <% if @count == 0 %>
             <div class="item active imageThumbWorkShow">
           <% else %>
-            <div class="item imageThumbWorkShow">
+            <div class="item imageThumbWorkShow"> 
           <% end %>
                 <img src="<%= picture.image.url %>" alt="..." class="imageThumbWorkShow">
-                <div class="carousel-caption">
-                </div>
             </div>
           <% @count += 1 %>
         <% end %>
@@ -67,8 +63,6 @@
         <% if @count == 0 %>  <!-- if no image was uploaded -->
          <div class="item active">
             <img src="../assets/idraulico.jpg" class="imageThumbWorkShow">
-            <div class="carousel-caption">
-            </div>
           </div>
         <% end %>
           
@@ -85,41 +79,40 @@
           <span class="sr-only">Next</span>
         </a>
   
-      </div>
-      <br>
-    </div> <!-- md-9 -->
-  
-   <div class="col-md-3">
-      <p>
-        <h2><strong><%= @work.title %></strong></h2>
-      </p>
-      
-      <p>
-        <strong>di:</strong> <%= @work.user.email %>
-      </p>
-      
-      <p>
-        <strong>Descrizione annuncio:</strong>
-        <%= @work.description.html_safe %>
-      </p>
-      
-      <p>
-        <strong>Ultima offerta:</strong>
-        <%= @price %>
-      </p>
-      
-      <p>
-        <strong>Location:</strong>
-        <%= @work.location %>
-      </p>
-  </div>
+      </div>  <!-- carousel -->
+    </div> <!-- md-6 -->
 
+   <div class="col-md-3">
+     
+  </div>
+  <div class="clearfix visible-xs-block"></div>
 </div> <!-- ROW -->
 
 </div> <!-- im-centered -->
 
 <hr>
 
+ <p>
+        <h2><strong><%= @work.title %></strong></h2>
+      </p>
+      <p>
+        <strong>di:</strong> <%= @work.user.email %>
+      </p>
+      <p>
+        <strong>Descrizione annuncio:</strong>
+        <%= @work.description.html_safe %>
+      </p>
+      <p>
+        <strong>Ultima offerta:</strong>
+        <%= @price %>
+      </p>
+  
+      <p>
+        <strong>Location:</strong>
+        <%= @work.location %>
+      </p>
+      
+      <hr>
 <div class= "form-signin text-center">
 <%= link_to 'Segui', work_follow_path(@work), :class => "btn btn-success" %> |
 <% if current_user.id == @work.user_id %>
@@ -133,7 +126,8 @@
   <div class="panel-heading">Ultime offerte</div>
   <div class="panel-body">
     
-<table class="table table-responsive table-hover">
+<div class="table-responsive">    
+<table class="table table-hover table-condensed">
   <thead>
     <tr>
       <th>Utente</th>
@@ -151,13 +145,21 @@
           <td></td>          
         <% else %>
           <td><%= bid.price %></td>
-          <td><%= link_to 'Accetta questa offerta', payments_path(@work) %></td>          
+          <td><%= link_to 'Accetta questa offerta', payments_path(@work), :class => "btn btn-success btn-xs" %></td>          
         <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 </div>
+
+</div>
 </div>
 
 </div>
+
+<% for i in 0..@recomend_cnt do%>
+  <div class="spacer">
+      &nbsp;
+  </div>
+<% end %>

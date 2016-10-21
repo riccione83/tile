@@ -11,19 +11,16 @@ body {
   src: url('/assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/assets/glyphicons-halflings-regular.woff') format('woff'), url('/assets/glyphicons-halflings-regular.ttf') format('truetype'), url('/assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 
-
-#leftbox {
-		float:left;
-		width: 15%;
-	    
+#rcorners6 {
+    border-radius: 15px 50px;
+    background: #73AD21;
+    padding: 20px; 
+    width: 200px;
+    height: 150px; 
+	float:right;
+	width: 15%;    
 }
 
-#rightbox {
-		float:right;
-		width: 15%;
-	    
-}
-	
 .imageThumbHomepage {
    width: 100%; 
    height: 140px !important;
@@ -34,7 +31,73 @@ body {
    height: 300px !important;
 }
 
-@media only screen and (max-device-width: 480px) {
+.spacer
+{
+    width: 100%;
+    height: 0px;
+}
+
+#leftbox {
+    float:left;
+	width: 15%;
+	z-index: 1030;
+}
+
+@media screen and (max-width: 800px) {
+
+#leftbox {
+    position: fixed;
+    top: 20px;
+    width: 100%;
+    padding: 0px;
+    z-index: 1030;
+}
+
+.spacer
+{
+    width: 100%;
+    height: 50px;
+}
+
+#rightbox {
+    position: fixed;
+    width: 100%;
+    padding: 0px;
+    padding-bottom: 50px;
+    z-index: 99999;
+}
+
+#rcorners6 {
+    background-color: #F3F3F3;
+    padding-top: 10px;
+    padding-bottom: 0px;
+    position: fixed;
+    bottom: 0;
+    width: 100%; 
+    z-index: 99999;
+}
+
+}
+	
+
+
+@media screen and (max-width: 360px) {
+
+.im-centered { margin: auto; max-width: 300px;}
+
+.imageThumbHomepage {
+   width: 100%; 
+   height: 80px !important;
+}
+
+.imageThumbWorkShow {
+   width: 150px; 
+   height: 110px !important;
+}
+
+}
+
+@media screen and (max-width: 480px) {
 
 .im-centered { margin: auto; max-width: 300px;}
 
@@ -50,13 +113,41 @@ body {
 
 }
 
-.rcorners6 {
-    border-radius: 15px 50px;
-    background: #73AD21;
-    padding: 20px; 
-    width: 200px;
-    height: 150px; 
+@media screen and (max-width: 640px) {
+
+.im-centered { margin: auto; max-width: 300px;}
+
+.imageThumbHomepage {
+   width: 100%; 
+   height: 80px !important;
 }
+
+.imageThumbWorkShow {
+   width: 300px; 
+   height: 200px !important;
+}
+
+}
+
+@media screen and (max-width: 667px) {
+
+.im-centered { margin: auto; max-width: 300px;}
+
+.imageThumbHomepage {
+   width: 100%; 
+   height: 80px !important;
+}
+
+.imageThumbWorkShow {
+   width: 300px; 
+   height: 200px !important;
+}
+
+}
+
+
+
+
 
 .carouselImg img {
   width: auto;
