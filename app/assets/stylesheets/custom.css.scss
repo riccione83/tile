@@ -11,14 +11,19 @@ body {
   src: url('/assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/assets/glyphicons-halflings-regular.woff') format('woff'), url('/assets/glyphicons-halflings-regular.ttf') format('truetype'), url('/assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 
+.nav-up {
+    top: -40px;
+}
+
 #rcorners6 {
-    border-radius: 15px 50px;
+    border-radius: 15px 15px 15px 15px;
     background: #73AD21;
-    padding: 20px; 
-    width: 200px;
-    height: 150px; 
-	float:right;
-	width: 15%;    
+    padding: 20px;
+    width: 300px;
+    height: 180px; 
+	float: right;
+	margin-right: 40px;
+	width: 20%;
 }
 
 .imageThumbHomepage {
@@ -50,7 +55,7 @@ body {
     top: 20px;
     width: 100%;
     padding: 0px;
-    z-index: 1030;
+    z-index: 1020;
 }
 
 .spacer
@@ -59,16 +64,9 @@ body {
     height: 50px;
 }
 
-#rightbox {
-    position: fixed;
-    width: 100%;
-    padding: 0px;
-    padding-bottom: 50px;
-    z-index: 99999;
-}
-
 #rcorners6 {
     background-color: #F3F3F3;
+    height: 140px; 
     padding-top: 10px;
     padding-bottom: 0px;
     position: fixed;
@@ -79,7 +77,6 @@ body {
 
 }
 	
-
 
 @media screen and (max-width: 360px) {
 
@@ -144,9 +141,6 @@ body {
 }
 
 }
-
-
-
 
 
 .carouselImg img {
