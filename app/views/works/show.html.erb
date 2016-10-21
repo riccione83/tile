@@ -1,6 +1,45 @@
+
+<div class="panel panel-default" id="leftbox" style="margin-top:30px;">
+  <div class="panel-heading">Consigliati per te</div>
+  <div class="panel-body">
+
+<table class="table table-responsive table-hover">
+  <tbody>
+    <% @recomends.each do |_work| %>
+     <% if _work.jaccard_index >= 0.08 %>
+      <tr>
+        <td><small><%= link_to _work.title, _work %></small> </td>
+        <td><small><%='%.2f' % _work.jaccard_index %></small></td>
+      </tr>
+     <% end %>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+
+<div id="rightbox" style="margin-top:30px;">
+  <% @price = getCurrentPriceForWork(@work) %>
+   <div class="col-md-3">
+    <form method="post" action=<%=new_bid_path(@work)%> class="rcorners6">
+      <% if @price.to_f == 0.0 %>
+        <b>Fai un'offera per primo!</b><br>
+      <% else %>
+        <b>Fai un'offerta</b><br>(la più bassa <%= @price %>€)<br>
+      <% end %>
+      <input type="text" name="new_price" class="form-control">
+      <button type="submit" class="btn btn-default glyphicon glyphicon-flash">Invia</button>
+    </form>
+  </div>
+</div>
+
+
+<div class="container">
+
 <div class= "container" style="margin-top:20px;">
 
 <p id="notice"><%= notice %></p>
+
 
 <div class="im-centered"> 
   
@@ -50,17 +89,29 @@
       <br>
     </div> <!-- md-9 -->
   
-  <% @price = getCurrentPriceForWork(@work) %>
    <div class="col-md-3">
-    <form method="post" action=<%=new_bid_path(@work)%> class="rcorners6">
-      <% if @price.to_f == 0.0 %>
-        <b>Fai un'offera per primo!</b><br>
-      <% else %>
-        <b>Fai un'offerta</b><br>(meno di <%= @price %>)<br>
-      <% end %>
-      <input type="text" name="new_price" class="form-control"><br>
-      <input type="submit" name="submit" value="Invia i dati">
-    </form>
+      <p>
+        <h2><strong><%= @work.title %></strong></h2>
+      </p>
+      
+      <p>
+        <strong>di:</strong> <%= @work.user.email %>
+      </p>
+      
+      <p>
+        <strong>Descrizione annuncio:</strong>
+        <%= @work.description.html_safe %>
+      </p>
+      
+      <p>
+        <strong>Ultima offerta:</strong>
+        <%= @price %>
+      </p>
+      
+      <p>
+        <strong>Location:</strong>
+        <%= @work.location %>
+      </p>
   </div>
 
 </div> <!-- ROW -->
@@ -69,43 +120,19 @@
 
 <hr>
 
-<p>
-  <strong>From:</strong>
-  <%= @work.user.email %>
-</p>
-
-<p>
-  <strong>Titolo:</strong>
-  <%= @work.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @work.description.html_safe %>
-</p>
-
-<p>
-  <strong>Ultima offerta:</strong>
-  <%= @price %>
-</p>
-
-<p>
-  <strong>Location:</strong>
-  <%= @work.location %>
-</p>
-
-<hr>
-
 <div class= "form-signin text-center">
-<%= link_to 'Segui', work_follow_path(@work) %> |
+<%= link_to 'Segui', work_follow_path(@work), :class => "btn btn-success" %> |
 <% if current_user.id == @work.user_id %>
-  <%= link_to 'Modifica', edit_work_path(@work) %> |
+  <%= link_to 'Modifica', edit_work_path(@work), :class => "btn btn-warning" %> |
 <% end %>
-<%= link_to 'Indietro', works_path %>
+<%= link_to 'Indietro', works_path, :class => "btn btn-info" %>
 </div>
 <hr>
 
-<h3>Ultime offerte</h3>
+<div class="panel panel-default">
+  <div class="panel-heading">Ultime offerte</div>
+  <div class="panel-body">
+    
 <table class="table table-responsive table-hover">
   <thead>
     <tr>
@@ -130,31 +157,7 @@
     <% end %>
   </tbody>
 </table>
-
-<hr>
-
-<h3>Consigliati per te</h3>
-
-<table class="table table-responsive table-hover">
-  <thead>
-    <tr>
-      <th>Titolo</th>
-      <th>Description</th>
-      <th>Jaccard index</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @recomends.each do |_work| %>
-     <% if _work.jaccard_index >= 0.08 %>
-      <tr>
-        <td><%= link_to _work.title, _work %> </td>
-        <td><%=  truncateHTMLString(ActionView::Base.full_sanitizer.sanitize(_work.description),20).html_safe %></td>
-        <td><%='%.2f' % _work.jaccard_index %></td>
-      </tr>
-     <% end %>
-    <% end %>
-  </tbody>
-</table>
+</div>
+</div>
 
 </div>
