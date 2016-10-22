@@ -1,6 +1,8 @@
 class Work < ActiveRecord::Base
 
     belongs_to :user
+    has_one :payment
+    
     has_many :prices, dependent: :destroy
     has_many :pictures, dependent: :destroy
 

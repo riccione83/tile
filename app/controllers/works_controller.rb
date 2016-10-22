@@ -1,9 +1,11 @@
 class WorksController < ApplicationController
+  
   require 'paypal-sdk-adaptivepayments'
 
   include ApplicationHelper
   include WorksHelper
-
+  
+  protect_from_forgery unless: -> { request.format.json? }
   skip_before_action :verify_authenticity_token, only: [:new_bid]
   
   before_action :check_user_login, except: [:list]
@@ -19,8 +21,8 @@ class WorksController < ApplicationController
 
 #/payment/execute?paymentId=PAY-69V82858NK912443LLADZPVY&token=EC-54537771YR158502P&PayerID=DBU7ZW58YH94E
   def ipn_notify
-      params.permit! # Permit all Paypal input params
       byebug
+      params.permit! # Permit all Paypal input params
       if PayPal::SDK::Core::API::IPN.valid?(request.raw_post)
         logger.info("IPN message: VERIFIED")
         render :text => "VERIFIED"
@@ -37,10 +39,12 @@ class WorksController < ApplicationController
   
   def pay
       byebug
+      
+      @api = PayPal::SDK::AdaptivePayments.new
       @pay = @api.build_pay(params[:PayRequest] || default_api_value)
       @pay.ipnNotificationUrl ||= ipn_notify_url
-      @pay.returnUrl ||= adaptive_payments_url(:pay)
-      @pay.cancelUrl ||= adaptive_payments_url(:pay)
+      #@pay.returnUrl ||= adaptive_payments_url(:pay)
+      #@pay.cancelUrl ||= adaptive_payments_url(:pay)
       @pay_response = api.pay(@pay) if request.post?
       render nothing: true
   end
@@ -56,8 +60,6 @@ class WorksController < ApplicationController
     @percent = @total * 0.05
     @total_new = @total - @percent
 
-
-#
     # Build request object
     @pay = @api.build_pay({
       :actionType => "CREATE",
@@ -79,23 +81,6 @@ class WorksController < ApplicationController
     # Make API call & get response
     @response = @api.pay(@pay)
     
-#    @set_payment_options = @api.build_set_payment_options({
-#                                    :payKey => @response.pay_key,
-#                                                                   :receiverOptions => [{
-#                                                                :receiver => { 
-#                                                                  :email => "pay_pal_shop_email@test.com@test.com" 
-#                                                                },                                                                     
-#                                                                :description => "Descrition",
-#                                                                :invoiceData => {
-#                                                                :item => [{
-#                                                                                :name => "Item Name",
-#                                                                                :price => 23.33,
-#                                                                                :itemPrice => 45.44,
-#                                                                                :itemCount => 5}]},
-#                                                                                }]})
-    
-#    @set_payment_options_response = @api.set_payment_options(@set_payment_options)
-
     # Access response
     if @response.success? && @response.payment_exec_status != "ERROR"
       @response.payKey

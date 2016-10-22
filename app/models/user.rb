@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
          
   has_many :works, dependent: :destroy
   has_many :prices, dependent: :destroy
+  has_many :payments
 end
