@@ -1,6 +1,16 @@
 module ApplicationHelper
     
     
+    def isWorkClosed?(work)
+     # byebug
+       bids = Price.where(:work_id =>work.id, :id => Payment.select("work_id").where(status: "COMPLETED"))
+       if bids.any?
+         return true
+       else
+         return false
+       end
+    end
+    
     def getCurrentPriceForWork(work)
       @price = work.prices.where("price > ?", 0).order('price asc').first
       if @price == nil
@@ -10,14 +20,11 @@ module ApplicationHelper
       end
     end
     
-    
     def truncateHTMLString(string, len)
      # byebug
       a = truncate_html(string, length: len, omission: '...')
       return a
     end
-  
-  
   
     def categories
       

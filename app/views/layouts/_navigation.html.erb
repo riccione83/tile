@@ -14,9 +14,7 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
       <div class="navbar-form navbar-left">
-         
         <div class="form-group">
              <%= form_tag(list_path, :method => "get", id: "search-form") do %>
                 <%= text_field_tag :search, params[:search], placeholder: "Cerca un Cliente Adesso", class: "form-control" %> 
@@ -24,20 +22,31 @@
              <% end %>
         </div>
       </div>
-      
+
+
       <ul class="nav navbar-nav navbar-right">
           <li><%= link_to 'Home', root_path %></li>
           <li><%= link_to 'Vicino a te', list_path %></li>
           <li><%= link_to 'Categorie', categories_path %></li>
-           <% if user_signed_in? %>
-            <li><%= link_to 'Nuovo annuncio', new_work_path %></li>
-            <li><%= link_to 'Le mie richieste', works_path %></li>
-          <% end %>
+          
           <% if !user_signed_in? %>
            <li><%= link_to 'Login', new_user_session_path %></li>
            <li><%= link_to 'Registrati', new_user_registration_path %></li>
           <% else %>
-           <li><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
+            <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profilo di <%= current_user.email %><span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                 <% if user_signed_in? %>
+                  <li><%= link_to 'Nuovo annuncio', new_work_path %></li>
+                  <li><%= link_to 'Le mie richieste', works_path %></li>
+                  <li role="separator" class="divider"></li>
+                  <li><%= link_to 'Pagamenti effettuati', payment_out_path %></li>
+                  <li><%= link_to 'Pagamenti ricevuti', payment_in_path %></li>
+                  <li role="separator" class="divider"></li>
+                  <li><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
+                 <% end %>
+              </ul>
+            </li>           
           <% end %>
       </ul>
   
@@ -50,4 +59,9 @@
 -->
 
 </nav>
-
+<script>
+  $(document).ready(function(){
+        $('.dropdown-toggle').dropdown();
+    });
+    
+    </script>

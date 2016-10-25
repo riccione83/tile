@@ -1,0 +1,13 @@
+<div class="container">
+<div class="panel panel-default">
+  <div class="panel-heading"><b>Il tuo pagamento è avvenuto con successo.</b><br>Stampa questa pagina come promemoria se vuoi.</div>
+  <div class="panel-body">
+        <h3>Lavoro acquistato: <%= @bid.work.title %> (ID: <%= @bid.work.id %>)</h3>
+        <h3>Codice di pagamento: <%= @payment.transaction_id %></h3>
+        <h3>Totale del pagamento: <%= @bid.price.to_f.round(2) %></h3>
+        <h3>Pagamento inviato a:  <%= @bid.user.email %></h3>
+        <h3>Pagamento effettuato il: <%= @payment.created_at %></h3>
+    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Indietro', works_path, :class => "btn btn-info" %>
+</div>
+</div>

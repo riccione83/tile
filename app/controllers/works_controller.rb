@@ -1,16 +1,18 @@
 class WorksController < ApplicationController
   
   require 'paypal-sdk-adaptivepayments'
-
   include ApplicationHelper
   include WorksHelper
   
-  protect_from_forgery unless: -> { request.format.json? }
-  skip_before_action :verify_authenticity_token, only: [:new_bid]
-  
-  before_action :check_user_login, except: [:list]
-  before_action :set_work, only: [:show, :edit, :update, :destroy, :follow, :new_bid, :payments, :pay, :undo_pay], except: [:list]
+
+  skip_before_filter :verify_authenticity_token #, :only => [:ipn_notify]
   protect_from_forgery except: [:hook]
+ 
+  skip_before_action :verify_authenticity_token, only: [:new_bid, :ipn_notify]
+  
+  before_action :check_user_login, except: [:list, :ipn_notify]
+  before_action :set_work, only: [:show, :edit, :update, :destroy, :follow, :new_bid, :pay, :undo_pay, :ipn_notify], except: [:list, :make_payment]
+
 
   def check_user_login
     if !user_signed_in?
@@ -21,16 +23,24 @@ class WorksController < ApplicationController
 
 #/payment/execute?paymentId=PAY-69V82858NK912443LLADZPVY&token=EC-54537771YR158502P&PayerID=DBU7ZW58YH94E
   def ipn_notify
-      byebug
       params.permit! # Permit all Paypal input params
       if PayPal::SDK::Core::API::IPN.valid?(request.raw_post)
         logger.info("IPN message: VERIFIED")
+        @payment = Payment.create
+        @payment.status = params["status"].to_s
+        @payment.transaction_id = params["pay_key"].to_s
+        @payment.purchased_at = params["payment_request_date"]
+        @payment.notification_params = params["transaction"].to_s
+        user = User.find(params["user_id"])
+        @payment.user_id = user.id
+        @payment.work_id = params["id"]
+        @payment.save!
         render :text => "VERIFIED"
       else
         logger.info("IPN message: INVALID")
-        render :text => "INVALID"
+         render :text => "INVALID"
       end
-      render nothing: true
+   #   byebug
   end
   
   def undo_pay
@@ -38,63 +48,71 @@ class WorksController < ApplicationController
   end
   
   def pay
-      byebug
-      
+   # byebug
       @api = PayPal::SDK::AdaptivePayments.new
       @pay = @api.build_pay(params[:PayRequest] || default_api_value)
       @pay.ipnNotificationUrl ||= ipn_notify_url
-      #@pay.returnUrl ||= adaptive_payments_url(:pay)
-      #@pay.cancelUrl ||= adaptive_payments_url(:pay)
       @pay_response = api.pay(@pay) if request.post?
-      render nothing: true
+      redirect_to payment_done_path(params["id"],params["user_id"])
   end
 
-  def payments
+
+
+  def make_payment
     PayPal::SDK.configure( :mode => "sandbox", # "sandbox" or "live"
                            :client_id => "AeXBBsIkOg821eVIkhMzc3TWYTXai4wtaE2V04rYSGisElrVwYFM7JqNyV3gVOlPY9f3XKo2oP_6F5hk",
                            :client_secret => "EI1SaIZ8513J0dVIIJbXxlYKxfl61L93FP7pCe7kIZYOGMz6jYFi_t2pmnvYaqledqzEMr0P0BuRjVit")
                            
     @api = PayPal::SDK::AdaptivePayments.new
 
-    @total = getCurrentPriceForWork(@work).to_f
-    @percent = @total * 0.05
-    @total_new = @total - @percent
-
+    @bid = Price.find(params[:id])
+    @work = @bid.work
+    @total = @bid.price.to_f
+    @percent = (@total * 0.05).round(2)
+    @total_new = (@total - @percent).round(2)
+    
+   # byebug
     # Build request object
     @pay = @api.build_pay({
       :actionType => "CREATE",
       :cancelUrl => "https://tile-riccione83.c9users.io/works/#{@work.id}/undo_pay",
       :currencyCode => "EUR",
       :feesPayer => "SENDER",
-      :ipnNotificationUrl => "https://tile-riccione83.c9users.io/works/#{@work.id}/ipn_notify",
+      :ipnNotificationUrl => "https://tile-riccione83.c9users.io/works/#{@bid.id}/ipn_notify/#{current_user.id}",
       :receiverList => {
         :receiver => [{
           :amount => @total_new,
-          :email => "r.riki-facilitator@tiscali.it" },
+          :email =>  @bid.user.email },
           {
           :amount => @percent,
-          :email => "r.riki-buyer@tiscali.it" }
+          :email => "riccione83@me.com" }
           ]
       },
-      :returnUrl => "https://tile-riccione83.c9users.io/works/#{@work.id}/pay" })
+      :returnUrl => "https://tile-riccione83.c9users.io/works/#{@bid.id}/pay/#{current_user.id}" })
     
     # Make API call & get response
     @response = @api.pay(@pay)
     
     # Access response
+   # byebug
     if @response.success? && @response.payment_exec_status != "ERROR"
       @response.payKey
       redirect_to @api.payment_url(@response)  # Url to complete payment
     else
-      @response.error[0].message
+      flash[:notice] = @response.error[0].message
+      redirect_to work_path(@work)
     end
   end
+
+
 
   def categories
      if params[:s] and params[:s] != ""
             @works = Work.search_by_category(params[:s]).order("created_at DESC") if params[:where] != "0" and params[:where] != "1"
      end
   end
+
+
 
   def list
      if params[:search] and params[:search] != ""
@@ -109,6 +127,8 @@ class WorksController < ApplicationController
      end
   end
   
+  
+  
   # GET /works
   # GET /works.json
   def index
@@ -118,13 +138,13 @@ class WorksController < ApplicationController
   # GET /works/1
   # GET /works/1.json
   def show
+   #byebug
     @works = Work.all
     if @works.any?
       @bids = @work.prices.all
       @recomends = WorkRecommender.new(@work,@works).recommendations(@work.id).first(2)
+      @isAvailable = !isWorkClosed?(@work)
     end
-
-   # redirect_to @work.paypal_url(work_path(@work))
   end
 
   # GET /works/new

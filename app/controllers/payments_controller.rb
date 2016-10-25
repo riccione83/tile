@@ -1,6 +1,4 @@
-class PaymentController < ApplicationController
-
-  before_action :set_payment
+class PaymentsController < ApplicationController
   
   def index
     @payments = Payment.all
@@ -17,6 +15,29 @@ class PaymentController < ApplicationController
   # GET /works/1/edit
   def edit
   end
+  
+  def ricevuti
+
+    @bids = Price.where(:user_id => current_user.id, :id => Payment.select("work_id").where(status: "COMPLETED"))
+    
+  end
+  
+  def inviati
+   # byebug
+    @payments = Payment.where(:user_id => current_user.id)
+  end
+  
+  def done
+    @bid = Price.find(params[:id])
+    @work = @bid.work
+    @payment = Payment.all.where("work_id = ? and user_id = ?", @bid.id, params["user_id"]).first
+ #   byebug
+  end
+  
+  def cancelled
+    
+  end
+
 
 # POST /works
   # POST /works.json
@@ -69,6 +90,6 @@ class PaymentController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def payment_params
-      params.require(:payment).permit(:work_id, :user_id, :status, :transaction_id, :purchased_at, :notification_params)
+      params.require(:payment).permit(:work_id, :user_id, :status, :transaction_id, :purchased_at, :notification_params, :id)
     end
 end

@@ -1,0 +1,42 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+   Hai ricevuto <b><%= @bids.count if @bids %></b> pagamenti.
+  </div>
+  <div class="panel-body">
+        <% if @bids %>
+        <table class="table table-responsive table-hover table-striped">
+          <thead>
+            <tr>
+              <th colspan="1"></th>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Location</th>
+              <th>Effettuato da</th>
+              <th colspan="2"></th>
+            </tr>
+          </thead>
+        
+          <tbody>
+            <% @bids.each do |bid| %>
+              <tr>
+                <% if  bid.work.pictures.any? %>
+                    <td><img src="<%= bid.work.pictures.first.image.url %>" style="width: 150px;" alt="..."></td>
+                <% else %>
+                    <td>Nessuna foto</td>
+                <% end %>
+                <td><%= bid.work.title %></td>
+                <td><%= truncateHTMLString(bid.work.description,200).html_safe %></td>
+                <td><%= bid.price %></td>
+                <td><%= bid.work.location %></td>
+                <td><%= mail_to bid.work.user.email %></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+    <% end %>
+    </div>
+</div>

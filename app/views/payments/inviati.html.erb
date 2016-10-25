@@ -1,0 +1,39 @@
+
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+   Hai inviato <b><%= @payments.count if @payments %></b> pagamenti.
+  </div>
+  <div class="panel-body">
+        <% if @payments %>
+        <table class="table table-responsive table-hover table-striped">
+          <thead>
+            <tr>
+              <th>Lavoro acquistato</th>
+              <th>Codice di pagamento</th>
+              <th>Totale del pagamento</th>
+              <th>Pagamento inviato a</th>
+              <th>Pagamento effettuato il</th>
+              <th colspan="2"></th>
+            </tr>
+          </thead>
+        
+          <tbody>
+            <% @payments.each do |payment| %>
+              <% @bid = Price.find(payment.work_id) %>
+              <tr>
+                <td><%= link_to @bid.work.title, work_path(@bid.work)  %></td>
+                <td><%= payment.transaction_id %></td>
+                <td><%= @bid.price.to_f.round(2) %></td>
+                <td><%= mail_to @bid.user.email %></td>
+                <td><%= payment.created_at %></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+    <% end %>
+    </div>
+</div>
