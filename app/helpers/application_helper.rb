@@ -25,7 +25,7 @@ module ApplicationHelper
       a = truncate_html(string, length: len, omission: '...')
       return a
     end
-  
+    
     def categories
       
       return     ["Tutte le categorie",
