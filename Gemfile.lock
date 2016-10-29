@@ -88,6 +88,7 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.2)
+    cookie_alert (0.0.5)
     debug_inspector (0.0.2)
     devise (4.2.0)
       bcrypt (~> 3.0)
@@ -246,6 +247,7 @@ DEPENDENCIES
   ckeditor!
   classifier-reborn
   coffee-rails (~> 4.1.0)
+  cookie_alert
   devise
   fast-stemmer
   fog (= 1.23.0)

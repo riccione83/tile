@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :works
   resources :payments
   
+  mount CookieAlert::Engine => "/cookie-alert"
+  
   get 'home', :to => "home#homepage"
   post '/works/:id/new_bid', :to => "works#new_bid", :as => "new_bid"
   get '/works/:id/follow', :to => "works#follow", :as => "work_follow"

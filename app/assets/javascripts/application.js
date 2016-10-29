@@ -12,6 +12,7 @@
 //
 
 //= require ckeditor/init
+//= require cookie_alert
 //= require jquery
 //= require jquery_ujs
 //= require_tree .

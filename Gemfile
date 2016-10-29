@@ -47,6 +47,7 @@ gem 'classifier-reborn'
 gem 'fast-stemmer'
 gem 'paypal-sdk-adaptivepayments'
 gem 'htmlcompressor'
+gem "cookie_alert"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
