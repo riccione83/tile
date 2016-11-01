@@ -104,7 +104,11 @@ class WorksController < ApplicationController
     end
   end
 
-
+  def accept
+    @bid = Price.find(params[:id])
+    @work = @bid.work
+    @total = @bid.price.to_f
+  end
 
   def categories
      if params[:s] and params[:s] != ""

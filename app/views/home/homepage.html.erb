@@ -1,5 +1,157 @@
-<div class="container">
+<% if !user_signed_in? %>
+  <style type="text/css">
+    body {
+      background: linear-gradient(
+      rgba(0,0,0,0.7),
+      rgba(0,0,0,0.7)
+      ),url("assets/bg/lake.jpg") no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+    
+    h1 {
+      color: white;
+      font-weight: bold;
+    }
+    .container-index {
+      margin-right: 15%;
+      margin-left: 10%;
+    }
+    
+    .text {
+      color: white;
+      font-weight: 300;
+      font-size: 150%;
+    }
+    
+    .log-in {
+      margin-top: 10%;
+      float: right;
+      width: 300px;
+      height: 200px;
+    }
+    
+    .sign-up {
+      float: right;
+      width: 300px;
+      height: 250px;
+    }
+    
+    .login-field {
+      width: 90%;
+      margin-left: 5%;
+      margin-top: 0%;
+    }
+    .remember-field {
+      margin-left: 5%;
+    }
+    .password-field {
+      width: 90%;
+      margin-left: 5%;
+    }
+    .action-button-login {
+      position: absolute;
+      margin-right: 10%;
+      margin-top: 80%;
+    }
+    
+    .action-button-signup {
+      position: absolute;
+      margin-right: 10%;
+      margin-top: 130%;
+    }
+  </style>
+  <div class="container-index row">
+    
+    <div class="col-sm-6">
+        <h1>Welcome to [Project Tile]</h1>
+        <p class="text">
+          Find your perfect job<br>
+          Publish your request and wait for someone<br>
+          Free!
+        </p>
+    </div>
+    <div class="col-sm-6">
+        <div class="log-in panel">
+          <h4 style="font-family: 'Pacifico', cursive; margin-left:2%;">Log In</h4>
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class="row">
+              <div class="col-xs-8">
+                  <div class="field login-field">
+                    <%= f.label :email %><br />
+                    <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+                  </div>
+                  <div class="field password-field">
+                    <%= f.label :password %><br />
+                    <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+                  </div>
+                  <% if devise_mapping.rememberable? -%>
+                    <div class="field remember-field">
+                      <%= f.check_box :remember_me %>
+                      <%= f.label :remember_me %>
+                    </div>
+                  <% end %>
+              </div>
+              <div class="col-xs-4">
+                <div class="actions action-button-login">
+                  <%= f.submit "Log in", :class => "btn btn-success" %>
+                </div>
+              </div>
+              
+            </div>
+            <% end %>
+        </div>
+        
+        <div class="sign-up panel">
+          <h4 style="font-family: 'Pacifico', cursive; margin-left: 2%;">Sign up</h4>
+          <div class="row">
+            
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= devise_error_messages! %>
+          
+          <div class="col-xs-8">
+            
+            <div class="field login-field">
+              <%= f.label :email %><br />
+              <%= f.email_field :email, class: 'form-control', autofocus: true %>
+            </div>
+          
+            <div class="field password-field">
+              <%= f.label :password %>
+              <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %><br />
+              <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+            </div>
+          
+            <div class="field password-field">
+              <%= f.label :password_confirmation %><br />
+              <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+            </div>
+          </div>
+          <div class="col-xs-4">
+            
+            <div class="actions action-button-signup">
+              <%= f.submit "Sign up", :class => "btn btn-warning" %>
+            </div>
+          </div>  
+          
+          <% end %>
 
+          
+          </div>
+        </div>
+    </div>
+    
+    
+  </div>
+
+
+
+<% else %>
+<div class="container">
 
 <div class="page-header">
 <div class="jumbotron">
@@ -101,6 +253,6 @@
 </div>   <!-- PanelBody -->
 
 </div>
-
-
 </div>
+
+<% end %>

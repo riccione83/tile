@@ -157,7 +157,7 @@
               <% if !@isAvailable %>
                 <td>Hai già assegnato questo lavoro</td>
               <% else %>
-                <td><%= link_to 'Accetta questa offerta', make_payment_path(bid), :class => "btn btn-success btn-xs" %></td>    
+                <td><%= link_to 'Accetta questa offerta', work_accepted_path(bid), :class => "btn btn-success btn-xs" %></td>    
               <% end %>
             <% else %>
               <td> </td>

@@ -20,6 +20,7 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <% if user_signed_in? %>
       <div class="navbar-form navbar-left">
         <div class="form-group">
              <%= form_tag(list_path, :method => "get", id: "search-form") do %>
@@ -28,13 +29,15 @@
              <% end %>
         </div>
       </div>
+     <% end %>
 
 
       <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
           <li><%= link_to 'Home', root_path %></li>
           <li><%= link_to 'Vicino a te', list_path %></li>
           <li><%= link_to 'Categorie', categories_path %></li>
-          
+        <% end %>  
           <% if !user_signed_in? %>
            <li><%= link_to 'Login', new_user_session_path %></li>
            <li><%= link_to 'Registrati', new_user_registration_path %></li>
