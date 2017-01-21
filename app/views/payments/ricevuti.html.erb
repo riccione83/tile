@@ -1,19 +1,20 @@
 <div class="panel panel-default">
   <!-- Default panel contents -->
   <div class="panel-heading">
-   Hai ricevuto <b><%= @bids.count if @bids %></b> pagamenti.
+   Hai <b><%= @bids.count if @bids %></b> lavori assegnati.
   </div>
   <div class="panel-body">
         <% if @bids %>
         <table class="table table-responsive table-hover table-striped">
           <thead>
             <tr>
+              <th>Numero</th>
               <th colspan="1"></th>
-              <th>Title</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>Location</th>
-              <th>Effettuato da</th>
+              <th>Titolo</th>
+              <th>Descrizione</th>
+              <th>Prezzo concordato</th>
+              <th>Città</th>
+              <th>Cliente</th>
               <th colspan="2"></th>
             </tr>
           </thead>
@@ -21,6 +22,7 @@
           <tbody>
             <% @bids.each do |bid| %>
               <tr>
+                <td><%= bid.work.id %></td>
                 <% if  bid.work.pictures.any? %>
                     <td><img src="<%= bid.work.pictures.first.image.url %>" style="width: 150px;" alt="..."></td>
                 <% else %>

@@ -1,258 +1,219 @@
 <% if !user_signed_in? %>
-  <style type="text/css">
-    body {
-      background: linear-gradient(
-        rgba(0,0,0,0.7),
-        rgba(0,0,0,0.7)
-      ),url("assets/bg/lake.jpg") no-repeat center center fixed;
-      
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;
-    }
-    
-    h1 {
-      color: white;
-      font-weight: bold;
-    }
-    .container-index {
-      margin-right: 15%;
-      margin-left: 10%;
-    }
-    
-    .text {
-      color: white;
-      font-weight: 300;
-      font-size: 150%;
-    }
-    
-    .log-in {
-      margin-top: 10%;
-      float: right;
-      width: 300px;
-      height: 200px;
-    }
-    
-    .sign-up {
-      float: right;
-      width: 300px;
-      height: 250px;
-    }
-    
-    .login-field {
-      width: 90%;
-      margin-left: 5%;
-      margin-top: 0%;
-    }
-    .remember-field {
-      margin-left: 5%;
-    }
-    .password-field {
-      width: 90%;
-      margin-left: 5%;
-    }
-    .action-button-login {
-      position: absolute;
-      margin-right: 10%;
-      margin-top: 80%;
-    }
-    
-    .action-button-signup {
-      position: absolute;
-      margin-right: 10%;
-      margin-top: 130%;
-    }
-  </style>
-  <div class="container-index row">
-    
-    <div class="col-sm-6">
-        <h1>Welcome to [Project Tile]</h1>
-        <p class="text">
-          Find your perfect job<br>
-          Publish your request and wait for someone<br>
-          Free!
-        </p>
-    </div>
-    <div class="col-sm-6">
-        <div class="log-in panel">
-          <h4 style="font-family: 'Pacifico', cursive; margin-left:2%;">Log In</h4>
-            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-            <div class="row">
-              <div class="col-xs-8">
-                  <div class="field login-field">
-                    <%= f.label :email %><br />
-                    <%= f.email_field :email, autofocus: true, class: 'form-control' %>
-                  </div>
-                  <div class="field password-field">
-                    <%= f.label :password %><br />
-                    <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
-                  </div>
-                  <% if devise_mapping.rememberable? -%>
-                    <div class="field remember-field">
-                      <%= f.check_box :remember_me %>
-                      <%= f.label :remember_me %>
-                    </div>
-                  <% end %>
-              </div>
-              <div class="col-xs-4">
-                <div class="actions action-button-login">
+<style type="text/css">
+     body {
+         background: linear-gradient(
+         rgba(0,0,0,0.7),
+         rgba(0,0,0,0.7)
+         ),url("assets/bg/lake.jpg") no-repeat center center fixed;
+         
+         -webkit-background-size: cover;
+         -moz-background-size: cover;
+         -o-background-size: cover;
+         background-size: cover;
+     }
+     h1 {
+         color: white;
+         font-weight: bold;
+     }
+     .container-index {
+         margin-right: 15%;
+         margin-left: 10%;
+     }
+     .text {
+         color: white;
+         font-weight: 300;
+         font-size: 150%;
+     }
+     .log-in {
+         margin-top: 10%;
+         float: right;
+         width: 300px;
+         height: 200px;
+     }
+     .sign-up {
+         float: right;
+         width: 300px;
+         height: 250px;
+     }
+     .login-field {
+         width: 90%;
+         margin-left: 5%;
+         margin-top: 0%;
+     }
+     .remember-field {
+         margin-left: 5%;
+     }
+     .password-field {
+         width: 90%;
+         margin-left: 5%;
+     }
+     .action-button-login {
+         position: absolute;
+         margin-right: 10%;
+         margin-top: 80%;
+     }
+     .action-button-signup {
+         position: absolute;
+         margin-right: 10%;
+         margin-top: 130%;
+     }
+</style>
+
+<div class="container-index row">
+   <div class="col-sm-6">
+      <h1>Benvenuti su [Project Tile]</h1>
+      <p class="text">
+         Pubblica le tue richieste<br>
+         Trova il Tuo prossimo Cliente<br>
+         Chiudi l'affare!<br>
+         Gratis
+      </p>
+   </div>
+   <div class="col-sm-5">
+      <div class="log-in panel">
+         <h4 style="font-family: 'Pacifico', cursive; margin-left:2%;">Log In</h4>
+         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+         <div class="row">
+            <div class="col-xs-8">
+               <div class="field login-field">
+                  <%= f.label :email %><br />
+                  <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+               </div>
+               <div class="field password-field">
+                  <%= f.label :password %><br />
+                  <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+               </div>
+               <% if devise_mapping.rememberable? -%>
+               <div class="field remember-field">
+                  <%= f.check_box :remember_me %>
+                  <%= f.label :remember_me %>
+               </div>
+               <% end %>
+            </div>
+            <div class="col-xs-4">
+               <div class="actions action-button-login">
                   <%= f.submit "Log in", :class => "btn btn-success" %>
-                </div>
-              </div>
-              
+               </div>
+            </div>
+         </div>
+         <% end %>
+      </div>
+      <br>
+      <div class="sign-up panel">
+         <h4 style="font-family: 'Pacifico', cursive; margin-left: 2%;">Sign up</h4>
+         <div class="row">
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= devise_error_messages! %>
+            <div class="col-xs-8">
+               <div class="field login-field">
+                  <%= f.label :email %><br />
+                  <%= f.email_field :email, class: 'form-control', autofocus: true %>
+               </div>
+               <div class="field password-field">
+                  <%= f.label :password %>
+                  <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %> characters minimum)</em>
+                  <% end %><br />
+                  <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+               </div>
+               <div class="field password-field">
+                  <%= f.label :password_confirmation %><br />
+                  <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+               </div>
+            </div>
+            <div class="col-xs-4">
+               <div class="actions action-button-signup">
+                  <%= f.submit "Sign up", :class => "btn btn-warning" %>
+               </div>
             </div>
             <% end %>
-        </div>
-        
-        <div class="sign-up panel">
-          <h4 style="font-family: 'Pacifico', cursive; margin-left: 2%;">Sign up</h4>
-          <div class="row">
-            
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-            <%= devise_error_messages! %>
-          
-          <div class="col-xs-8">
-            
-            <div class="field login-field">
-              <%= f.label :email %><br />
-              <%= f.email_field :email, class: 'form-control', autofocus: true %>
-            </div>
-          
-            <div class="field password-field">
-              <%= f.label :password %>
-              <% if @minimum_password_length %>
-              <em>(<%= @minimum_password_length %> characters minimum)</em>
-              <% end %><br />
-              <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
-            </div>
-          
-            <div class="field password-field">
-              <%= f.label :password_confirmation %><br />
-              <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
-            </div>
-          </div>
-          <div class="col-xs-4">
-            
-            <div class="actions action-button-signup">
-              <%= f.submit "Sign up", :class => "btn btn-warning" %>
-            </div>
-          </div>  
-          
-          <% end %>
-
-          
-          </div>
-        </div>
-    </div>
-    
-    
-  </div>
-
-
-
+         </div>
+      </div>
+   </div>
+</div>
 <% else %>
 <div class="container">
-
 <div class="page-header">
-  <div class="jumbotron">
-    <h1>Welcome</h1>
-    <p>to [Project Tile]</p>
-  </div>
+   <div class="jumbotron">
+      <h1>Welcome</h1>
+      <p>to [Project Tile]</p>
+   </div>
 </div>
-
 <div>
-
 <div class="panel panel-default">
-  <!-- Default panel contents -->
-  <div class="panel-heading">
-    Nuove Richieste Scelte per Te
-  </div>
-  <div class="panel-body">
-
-<div class="row">
-
-<% @works.take(10).each do |work| %>
-
-  <div class="col-md-6 col-lg-3" >    <!--  "col-xs-6 col-md-3">  -->
-    
-    <div class="thumbnail" stile="height=200px !important;">
-      
-      <div id="carousel_<%=work.id%>" class="carousel slide" data-ride="carousel">
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-        
-        <% @count = 0 %>  
-        <% work.pictures.each do |picture| %>  
-          <% if @count == 0 %>
-            <div class="item active imageThumbHomepage">
-          <% else %>
-            <div class="item imageThumbHomepage">
-          <% end %>
-              <img src="<%= picture.image.url %>" class="imageThumbHomepage" alt="...">
-              <div class="carousel-caption">
-              </div>
-          </div>  <!-- end item imageThumb -->
-          <% @count += 1 %>
-        <% end %>
-        
-        <% if @count == 0 %>  <!-- if no image was uploaded -->
-         <div class="item active" class = "imageThumbHomepage">
-            <img src="../assets/idraulico.jpg" alt="..." class = "imageThumbHomepage">
-            <div class="carousel-caption">
+   <!-- Default panel contents -->
+   <div class="panel-heading">
+      Nuove Richieste Scelte per Te
+   </div>
+   <div class="panel-body">
+      <div class="row">
+         <% @works.take(10).each do |work| %>
+         <div class="col-md-6 col-lg-3" >
+            <!--  "col-xs-6 col-md-3">  -->
+            <div class="thumbnail" stile="height=200px !important;">
+               <div id="carousel_<%=work.id%>" class="carousel slide" data-ride="carousel">
+                  <!-- Wrapper for slides -->
+                  <div class="carousel-inner" role="listbox">
+                     <% @count = 0 %>  
+                     <% work.pictures.each do |picture| %>  
+                     <% if @count == 0 %>
+                     <div class="item active imageThumbHomepage">
+                        <% else %>
+                        <div class="item imageThumbHomepage">
+                           <% end %>
+                           <img src="<%= picture.image.url %>" class="imageThumbHomepage" alt="...">
+                           <div class="carousel-caption">
+                           </div>
+                        </div>
+                        <!-- end item imageThumb -->
+                        <% @count += 1 %>
+                        <% end %>
+                        <% if @count == 0 %>  <!-- if no image was uploaded -->
+                        <div class="item active" class = "imageThumbHomepage">
+                           <img src="../assets/idraulico.jpg" alt="..." class = "imageThumbHomepage">
+                           <div class="carousel-caption">
+                           </div>
+                        </div>
+                        <% end %>
+                     </div>
+                     <!-- Controls -->
+                     <a class="left carousel-control imageThumbHomepage" href="#carousel_<%=work.id%>" role="button" data-slide="prev">
+                     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                     <span class="sr-only">Previous</span>
+                     </a>
+                     <a class="right carousel-control imageThumbHomepage" href="#carousel_<%=work.id%>" role="button" data-slide="next">
+                     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                     <span class="sr-only">Next</span>
+                     </a>
+                  </div>
+                  <div class="caption">
+                     <h3><%= work.title %></h3>
+                     <% @descr = truncateHTMLString(ActionView::Base.full_sanitizer.sanitize(work.description).delete!("\r\n\t"), 30) %>
+                     <p><%= @descr.html_safe %>
+                        <% if @descr.mb_chars.length < 35 %>
+                        &nbsp;<br>
+                        <% end %>
+                     </p>
+                     <% if !isWorkClosed?(work) %>
+                     <% @price = getCurrentPriceForWork(work) %>
+                     <% if @price.to_f > 0.0 %>
+                     <h6><b>Al momento: <%= getCurrentPriceForWork(work) %>€</b></h6>
+                     <% else %>
+                     <h6><b>Fai un'offerta ora!</b></h6>
+                     <% end %>
+                     <% else %>
+                     <h6 class="text-danger"><b>Offerta chiusa</b></h6>
+                     <% end %>
+                     <h6><%= work.location %></h6>
+                     <p><a href=<%= work_path(work) %> class="btn btn-primary" role="button">More</a></p>
+                  </div>
+               </div>
             </div>
-          </div>
-        <% end %>
-      
-        </div>
-      
-        <!-- Controls -->
-        <a class="left carousel-control imageThumbHomepage" href="#carousel_<%=work.id%>" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        
-        <a class="right carousel-control imageThumbHomepage" href="#carousel_<%=work.id%>" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-  
+            <div class="clearfix visible-xs-block"></div>
+            <% end %>  
+         </div>
       </div>
-
-      <div class="caption">
-        <h3><%= work.title %></h3>
-        <% @descr = truncateHTMLString(ActionView::Base.full_sanitizer.sanitize(work.description).delete!("\r\n\t"), 30) %>
-        <p><%= @descr.html_safe %>
-      
-        <% if @descr.mb_chars.length < 35 %>
-           &nbsp;<br>
-        <% end %>
-        
-        </p>
-        <% if !isWorkClosed?(work) %>
-            <% @price = getCurrentPriceForWork(work) %>
-            <% if @price.to_f > 0.0 %>
-              <h6><b>Al momento: <%= getCurrentPriceForWork(work) %>€</b></h6>
-            <% else %>
-              <h6><b>Fai un'offerta ora!</b></h6>
-            <% end %>
-        <% else %>
-              <h6 class="text-danger"><b>Offerta chiusa</b></h6>
-        <% end %>
-        
-        <h6><%= work.location %></h6>
-        <p><a href=<%= work_path(work) %> class="btn btn-primary" role="button">More</a></p>
-      </div>
-    </div>
-  </div>
-  <div class="clearfix visible-xs-block"></div>
-<% end %>  
-
+      <!-- PanelBody -->
+   </div>
 </div>
-
-</div>   <!-- PanelBody -->
-
-</div>
-</div>
-
 <% end %>

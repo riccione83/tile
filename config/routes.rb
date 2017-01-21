@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get '/categories', :to => "works#categories", :as => "categories"
   
   get "/works/:id/accept", :to => "works#accept", :as => "work_accepted"
+  get "/works/:id/assign/:user_id", :to => "works#assign_work", :as => "assign_work"
   
   post "/works/:id/ipn_notify/:user_id" => "works#ipn_notify", :as => :ipn_notify
   get "/works/:id/pay/:user_id" => "works#pay"

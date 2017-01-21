@@ -11,7 +11,7 @@ class WorksController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:new_bid, :ipn_notify]
   
   before_action :check_user_login, except: [:list, :ipn_notify]
-  before_action :set_work, only: [:show, :edit, :update, :destroy, :follow, :new_bid, :pay, :undo_pay, :ipn_notify], except: [:list, :make_payment]
+  before_action :set_work, only: [:show, :edit, :update, :destroy, :follow, :new_bid, :pay, :undo_pay, :ipn_notify], except: [:list, :make_payment, :accept]
 
 
   def check_user_login
@@ -103,7 +103,20 @@ class WorksController < ApplicationController
       redirect_to work_path(@work)
     end
   end
-
+  
+  def assign_work
+    byebug
+    @payment = Payment.create
+    @payment.status = "COMPLETE"
+    @payment.transaction_id = "RANDOM_NUMBER"
+    @payment.purchased_at = "DATE NOW"
+    @payment.notification_params = ""
+    user = User.find(params["user_id"])
+    @payment.user_id = user.id
+    @payment.work_id = params["id"]
+    @payment.save!
+  end
+  
   def accept
     @bid = Price.find(params[:id])
     @work = @bid.work
@@ -158,9 +171,6 @@ class WorksController < ApplicationController
 
   # GET /works/1/edit
   def edit
-  end
-  
-  def accept
   end
   
   def follow

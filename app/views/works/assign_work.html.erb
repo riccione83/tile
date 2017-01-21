@@ -1,0 +1,31 @@
+ <style type="text/css">
+    .endbutton {
+         float: right;   
+    }
+</style>
+<div class="container">
+<h1>Completato.</h1>
+<h2>Ricapotoliamo i dati del lavoro aggiudicato.</h2>
+<div class="panel">
+
+</div>
+<div>
+    Per tornare alla lista dei lavori accettati clicca su <b>Fine</b>.<br>
+    Se vuoi puoi conservare questa pagina come promemoria.<br>
+    <br>
+    <%= link_to "Fine", payment_out_path, :class => "btn btn-warning endbutton" %>
+</div>
+</div>
+ 
+ <!--
+    @payment = Payment.create
+    @payment.status = "COMPLETE"
+    @payment.transaction_id = "RANDOM_NUMBER"
+    @payment.purchased_at = "DATE NOW"
+    @payment.notification_params = ""
+    user = User.find(params["user_id"])
+    @payment.user_id = user.id
+    @payment.work_id = params["work_id"]
+    @payment.save!
+    
+    -->

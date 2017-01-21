@@ -17,9 +17,7 @@ class PaymentsController < ApplicationController
   end
   
   def ricevuti
-
     @bids = Price.where(:user_id => current_user.id, :id => Payment.select("work_id").where(status: "COMPLETED"))
-    
   end
   
   def inviati
