@@ -146,7 +146,7 @@
 
     <% @bids.each do |bid| %>
       <tr>
-        <td><%= bid.user.email %></td>
+        <td><%=hideEmailAddress(bid.user.email) %></td>
         <% if bid.price == 0.0 %>
           <td>Sta seguendo</td>        
           <td></td>          

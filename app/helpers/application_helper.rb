@@ -12,6 +12,15 @@ module ApplicationHelper
         	return "alert alert-warning alert-dismissible"
         end
     end
+    
+    def hideEmailAddress(email_address)
+      asterisk = "*"
+      addr = email_address.split('@')
+      (0..addr[1].mb_chars.length).each do |cnt| 
+        asterisk = asterisk + "*"
+      end
+      return addr[0] + asterisk
+    end
 
     def isWorkClosed?(work)
      # byebug

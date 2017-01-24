@@ -30,7 +30,7 @@
                 <td><%= @bid.price.to_f.round(2) %></td>
                 <td><%= mail_to @bid.user.email %></td>
                 <td><%= payment.created_at %></td>
-                <td></td>
+                <td><%= link_to "Segnala un problema", "/", :class => "btn btn-warning endbutton" %></td>
                 <td></td>
             </tr>
             <% end %>

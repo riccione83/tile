@@ -8,15 +8,17 @@
 <h2>Stai per affidare il lavoro, rivedi le informazioni prima di completare.</h2>
 <div class="panel">
     Stai per assegnare il lavoro <b><%= @work.title %></b> all'utente <b><%= @bid.user.email %></b><br>
-    Il prezzo che hai accettato è di <b><%= @bid.price %>€</b><br>
+    Il prezzo che hai accettato è di €<b><%= @bid.price %></b><br>
     Adesso devi concordare con l'utente che si è aggiudicato il tuo lavoro i dettagli per cominciare.<br>
     Noi possiamo consigliarti di:<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;-> Scambiarvi i numeri di telefono<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;-> Specificare o confermare la data di inizio lavori<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;-> Concordare i modi di pagamento<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;-> Non effettuare pagamenti anticipatamente se non si è sicuri dell'utente<br>
+    <ul>
+    &nbsp;&nbsp;&nbsp;&nbsp;<li> Scambiarvi i numeri di telefono</li>
+    &nbsp;&nbsp;&nbsp;&nbsp;<li> Specificare o confermare la data di inizio lavori</li>
+    &nbsp;&nbsp;&nbsp;&nbsp;<li> Concordare i modi di pagamento</li>
+    &nbsp;&nbsp;&nbsp;&nbsp;<li> Non effettuare pagamenti anticipatamente se non si conosce l'utente</li>
+    </ul>
     Ti ricordiamo che questo è un'accordo privato che esula dal controllo di [Project Tile]<br>
-    [Project Tile] pertanto non è responsabile dei lavori effettuati, ma è solo un sistema di contatto fra utenti.<br>
+    [Project Tile] non è responsabile della qualità dei lavori effettuati.<br>
 </div>
 <div>
     Per proseguire clicca su <b>Accetta</b>, verrà inviata un'email di conferma ad entrambi per la conclusione dell'asta.<br>
