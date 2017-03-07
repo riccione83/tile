@@ -1,4 +1,6 @@
 
+
+<% if @recomends.count > 0 %>
 <div class="panel panel-default" id="leftbox" style="margin-top:30px; ">
   <div class="panel-heading">Consigliati per te</div>
   <div class="panel-body">
@@ -9,7 +11,7 @@
 <table class="table table-hover">
   <tbody>
     <% @recomends.each do |_work| %>
-     <% if _work.jaccard_index >= 0.08 %>
+     <% if _work.jaccard_index >= 0.00 %>
      <% @recomend_cnt = @recomend_cnt + 1 %>
       <tr>
         <td><small><%= link_to _work.title, _work %></small> </td>
@@ -21,8 +23,9 @@
 </table>
 </div>
 </div>
-
 </div>
+
+<%end%>
 
 <% if @isAvailable %>
    <% @price = getCurrentPriceForWork(@work) %>
@@ -98,32 +101,33 @@
 <hr>
 
  <p>
-        <h2><strong><%= @work.title %></strong></h2>
+      <h2><strong><%= @work.title %></strong></h2>
       </p>
       <p>
         <strong>di:</strong> <%= @work.user.email %>
+      </p>
+      <p>
+        <strong>Posizione:</strong>
+        <%= @work.location %>
       </p>
       <p>
         <strong>Descrizione annuncio:</strong>
         <%= @work.description.html_safe %>
       </p>
       <p>
-        <strong>Ultima offerta:</strong>
+        <strong>Prezzo al momento:</strong>
         <%= @price %>
       </p>
   
-      <p>
-        <strong>Location:</strong>
-        <%= @work.location %>
-      </p>
+
       
       <hr>
 <div class= "form-signin text-center">
 <% if @isAvailable %>
-  <%= link_to 'Segui', work_follow_path(@work), :class => "btn btn-success glyphicon glyphicon-star" %> |
+  <%= link_to ' Segui', work_follow_path(@work), :class => "btn btn-success glyphicon glyphicon-star" %> |
 <% end %>
 <% if current_user.id == @work.user_id %>
-  <%= link_to 'Modifica', edit_work_path(@work), :class => "btn btn-warning glyphicon glyphicon-pencil" %> |
+  <%= link_to ' Modifica', edit_work_path(@work), :class => "btn btn-warning glyphicon glyphicon-pencil" %> |
 <% end %>
 <%= link_to 'Indietro', works_path, :class => "btn btn-info" %>
 </div>

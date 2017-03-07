@@ -24,7 +24,7 @@
       <div class="navbar-form navbar-left">
         <div class="form-group">
              <%= form_tag(list_path, :method => "get", id: "search-form") do %>
-                <%= text_field_tag :search, params[:search], placeholder: "Cerca un Cliente Adesso", class: "form-control" %> 
+                <%= text_field_tag :search, params[:search], placeholder: "Cerca un Annuncio", class: "form-control" %> 
                 <%= submit_tag "Cerca" %>
              <% end %>
         </div>
@@ -46,11 +46,11 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profilo di <%= current_user.email %><span class="caret"></span></a>
               <ul class="dropdown-menu">
                  <% if user_signed_in? %>
-                  <li><%= link_to 'Nuovo annuncio', new_work_path %></li>
-                  <li><%= link_to 'Le mie richieste', works_path %></li>
+                  <li><%= link_to 'Nuovo Annuncio', new_work_path %></li>
+                  <li><%= link_to 'I miei Annunci', works_path %></li>
                   <li role="separator" class="divider"></li>
-                  <li><%= link_to 'Lavori Aggiudicati', payment_out_path %></li>
-                  <li><%= link_to 'Lavori Presi', payment_in_path %></li>
+                  <li><%= link_to 'I Tuoi Annunci Aggiudicati', payment_out_path %></li>
+                  <li><%= link_to 'Aste che ti sei Aggiudicato', payment_in_path %></li>
                   <li role="separator" class="divider"></li>
                   <li><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
                  <% end %>

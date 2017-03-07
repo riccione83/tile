@@ -12,40 +12,46 @@
     </div>
   <% end %>
 
+   
    <%= f.hidden_field :user_id, :value => current_user.id %>
 
   <div class="field">
-    <%= f.label "Titolo descrittivo" %><br>
-    <%= f.text_field :title %>
+    <%= f.label "Titolo" %><br>
+    <%= f.text_field :title, class: "form-control" %>
   </div>
+  <br>
   <div class="field">
     <%= f.label "Descrizione dei lavori" %><br>
     <%= f.cktext_area :description %>
   </div>
-
-
+  <br>
   <div class="field">
     <%= f.label "Città" %><br>
     <%= f.collection_select :location, regioni, :to_s, :to_s, include_blank: false %>
   </div>
-  
+  <br>
   <div class="field">
     <%= f.label "Categoria" %><br>
     <%= f.collection_select :categories, categories, :to_s, :to_s, include_blank: false %>
   </div>
-  
+  <br>
   <div class="field">
   <div class="control-group">
-    <%= f.label "Inserisci le eventuali foto", class: 'control-label' %>
+    <%= f.label "Inserisci le foto (opzionale ma aiuta)", class: 'control-label' %>
     <div class="controls">
       <%= file_field_tag "images[]", type: :file, multiple: true %>
     </div>
   </div>
   </div>
   <hr>
-  <% if current_user.id == @work.user_id || @work.new_record? %>
+  <% if current_user.id == @work.user_id %>
     <div class="actions">
-      <%= f.submit "Invia" %>
+      <%= f.submit "Aggiorna Annuncio",:class => "btn btn-primary" %>
+    </div>
+  <% end %>
+  <% if @work.new_record? %>
+    <div class="actions">
+      <%= f.submit "Crea Annuncio",:class => "btn btn-primary" %>
     </div>
   <% end %>
 <% end %>

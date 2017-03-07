@@ -181,7 +181,7 @@ class WorksController < ApplicationController
       @work.prices.create(:user_id => current_user.id, :price => 0.0)
       @work.save!
     else
-      flash[:notice] = "Hai già fatto offerte, già segui la gara."
+      flash[:notice] = "Hai già fatto offerte oppure segui già la gara."
     end
     redirect_to(work_path(@work))
   end
@@ -232,7 +232,7 @@ class WorksController < ApplicationController
           $work_classifier.new_train_data(params[:categories], ActionView::Base.full_sanitizer.sanitize(@work.description).delete!("\r\n\t") )
         end  
         
-        format.html { redirect_to @work, notice: 'Work was successfully created.' }
+        format.html { redirect_to @work, notice: 'Nuovo annuncio creato.' }
         format.json { render :show, status: :created, location: @work }
       else
         format.html { render :new }
@@ -260,7 +260,7 @@ class WorksController < ApplicationController
           $work_classifier.new_train_data(@work.categories, ActionView::Base.full_sanitizer.sanitize(@work.description).delete!("\r\n\t") )
         end  
         
-        format.html { redirect_to @work, notice: 'Work was successfully updated.' }
+        format.html { redirect_to @work, notice: '' }
         format.json { render :show, status: :ok, location: @work }
       else
         format.html { render :edit }
@@ -274,7 +274,7 @@ class WorksController < ApplicationController
   def destroy
     @work.destroy
     respond_to do |format|
-      format.html { redirect_to works_url, notice: 'Work was successfully destroyed.' }
+      format.html { redirect_to works_url, notice: '' }
       format.json { head :no_content }
     end
   end

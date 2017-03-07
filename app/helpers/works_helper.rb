@@ -17,7 +17,4 @@ module WorksHelper
     def service_action
       params[:action]
     end
-
-    
-    
 end

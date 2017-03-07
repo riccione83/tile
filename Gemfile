@@ -43,6 +43,7 @@ gem 'devise'  #user
 gem 'ckeditor', github: 'galetahub/ckeditor' #for text editor
 gem 'truncate_html','0.3.2'
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+gem 'aws-sdk', '~> 2.3.0'
 gem 'classifier-reborn'
 gem 'fast-stemmer'
 gem 'paypal-sdk-adaptivepayments'
