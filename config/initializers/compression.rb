@@ -43,4 +43,4 @@ Rails.application.configure do
 #    remove_style_attributes: true,
 #    simple_boolean_attributes: true,
 #    simple_doctype: false
-#end
+end
