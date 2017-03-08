@@ -11,10 +11,10 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
   
   # Compress JavaScripts and CSS
-  config.assets.compress = true
+  config.assets.compress = false #true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = true
+  config.assets.compile = false #true
   config.assets.precompile =  ['*.js', '*.css', '*.css.erb'] 
 
   # Generate digests for assets URLs
