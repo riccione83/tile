@@ -25,8 +25,7 @@ else
       :s3_permissions => 'public-read',
       :s3_protocol => 'https',
       :convert_options => { :all => '-auto-orient' },
-      :path => ":rails_root/public/images/:id/:filename",
-      :url => "/images/:id/:filename"
+      :path => ":rails_root/public/images/:id/:filename"
 end
 
   do_not_validate_attachment_file_type :image
