@@ -12,8 +12,6 @@ if Rails.env == "development"
       :convert_options => { :all => '-auto-orient' },
       :path => ":rails_root/public/images/:id/:filename",
       :url => "/images/:id/:filename"
-                    
-  do_not_validate_attachment_file_type :image
 else
   puts "**** USING AWS S3 STORAGE ****"
     has_attached_file :image,
@@ -30,10 +28,9 @@ else
       :path => ":rails_root/public/images/:id/:filename",
       :url => "/images/:id/:filename"
 end
-  #has_attached_file :image,
-  #                  :storage => :s3,
-  #                  :s3_credentials => Proc.new{|a| a.instance.s3_credentials }
-  
+
+  do_not_validate_attachment_file_type :image
+
   def s3_credentials
     {:bucket => "tiledev", :access_key_id => "AKIAJSWUZGXW7B5YO3IQ", :secret_access_key => "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"}
   end
