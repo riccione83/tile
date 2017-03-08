@@ -2,22 +2,19 @@ Rails.application.configure do
   # Use environment names or environment variables:
   # break unless Rails.env.production? 
  
-  break unless Rails.env == "production"
+#  break unless Rails.env == "production"
   
   # Strip all comments from JavaScript files, even copyright notices.
   # By doing so, you are legally required to acknowledge
   # the use of the software somewhere in your Web site or app:
-  uglifier = Uglifier.new output: { comments: :none }
+#  uglifier = Uglifier.new output: { comments: :none }
 
-  # To keep all comments instead or only keep copyright notices (the default):
-  # uglifier = Uglifier.new output: { comments: :all }
-  # uglifier = Uglifier.new output: { comments: :copyright }
 
-  config.assets.compile = true
-  config.assets.debug = false
+#  config.assets.compile = true
+#  config.assets.debug = false
 
-  config.assets.js_compressor = uglifier
-  config.assets.css_compressor = :sass
+#  config.assets.js_compressor = uglifier
+#  config.assets.css_compressor = :sass
 
 #  config.middleware.use Rack::Deflater
 #  config.middleware.insert_before ActionDispatch::Static, Rack::Deflater
