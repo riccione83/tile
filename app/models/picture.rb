@@ -1,6 +1,8 @@
 class Picture < ActiveRecord::Base
   belongs_to :work
 
+if Rails.env == "development"
+  puts "**** USING LOCAL STORAGE MODE ****"
   has_attached_file :image,
     :styles => {
     :large => "250x166>",
@@ -12,14 +14,29 @@ class Picture < ActiveRecord::Base
       :url => "/images/:id/:filename"
                     
   do_not_validate_attachment_file_type :image
-   
+else
+  puts "**** USING AWS S3 STORAGE ****"
+    has_attached_file :image,
+    :styles => {
+    :large => "250x166>",
+    :medium => "250x166>",
+    :square => "250x166#", 
+    :small => "250x166>" },
+      :storage => :s3,
+      :s3_credentials => Proc.new{|a| a.instance.s3_credentials },
+      :s3_permissions => 'public-read',
+      :s3_protocol => 'https',
+      :convert_options => { :all => '-auto-orient' },
+      :path => ":rails_root/public/images/:id/:filename",
+      :url => "/images/:id/:filename"
+end
   #has_attached_file :image,
   #                  :storage => :s3,
   #                  :s3_credentials => Proc.new{|a| a.instance.s3_credentials }
   
-  #def s3_credentials
-  #  {:bucket => "xxx", :access_key_id => "xxx", :secret_access_key => "xxx"}
-  #end
+  def s3_credentials
+    {:bucket => "tiledev", :access_key_id => "AKIAJSWUZGXW7B5YO3IQ", :secret_access_key => "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"}
+  end
   
   #has_attached_file :attachment, 
   #:styles => {
