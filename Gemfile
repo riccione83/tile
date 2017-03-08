@@ -67,5 +67,5 @@ end
 group :production do
   gem 'pg'
   gem 'rails_12factor'
-  gem 'yui-compressor'
+  gem 'yui-compressor', '~> 0.12.0'
 end
