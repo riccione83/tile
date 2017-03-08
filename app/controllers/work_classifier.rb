@@ -33,6 +33,7 @@ require 'classifier-reborn'
     @works = Work.all
     
     @categories = "informatica"
+    
     @classifier = ClassifierReborn::Bayes.new(
                   @categories,                 # one or more categories
                   enable_threshold: false, # default: false
