@@ -1,6 +1,5 @@
 class WorksController < ApplicationController
   
-  require 'paypal-sdk-adaptivepayments'
   include ApplicationHelper
   include WorksHelper
   
@@ -13,94 +12,9 @@ class WorksController < ApplicationController
   before_action :check_user_login, except: [:list, :ipn_notify]
   before_action :set_work, only: [:show, :edit, :update, :destroy, :follow, :new_bid, :pay, :undo_pay, :ipn_notify], except: [:list, :make_payment, :accept]
 
-
   def check_user_login
     if !user_signed_in?
       redirect_to(root_path)
-    end
-  end
-
-
-#/payment/execute?paymentId=PAY-69V82858NK912443LLADZPVY&token=EC-54537771YR158502P&PayerID=DBU7ZW58YH94E
-  def ipn_notify
-      params.permit! # Permit all Paypal input params
-      if PayPal::SDK::Core::API::IPN.valid?(request.raw_post)
-        logger.info("IPN message: VERIFIED")
-        @payment = Payment.create
-        @payment.status = params["status"].to_s
-        @payment.transaction_id = params["pay_key"].to_s
-        @payment.purchased_at = params["payment_request_date"]
-        @payment.notification_params = params["transaction"].to_s
-        user = User.find(params["user_id"])
-        @payment.user_id = user.id
-        @payment.work_id = params["id"]
-        @payment.save!
-        render :text => "VERIFIED"
-      else
-        logger.info("IPN message: INVALID")
-         render :text => "INVALID"
-      end
-   #   byebug
-  end
-  
-  def undo_pay
-    redirect_to work_path
-  end
-  
-  def pay
-   # byebug
-      @api = PayPal::SDK::AdaptivePayments.new
-      @pay = @api.build_pay(params[:PayRequest] || default_api_value)
-      @pay.ipnNotificationUrl ||= ipn_notify_url
-      @pay_response = api.pay(@pay) if request.post?
-      redirect_to payment_done_path(params["id"],params["user_id"])
-  end
-
-
-
-  def make_payment
-    PayPal::SDK.configure( :mode => "sandbox", # "sandbox" or "live"
-                           :client_id => "AeXBBsIkOg821eVIkhMzc3TWYTXai4wtaE2V04rYSGisElrVwYFM7JqNyV3gVOlPY9f3XKo2oP_6F5hk",
-                           :client_secret => "EI1SaIZ8513J0dVIIJbXxlYKxfl61L93FP7pCe7kIZYOGMz6jYFi_t2pmnvYaqledqzEMr0P0BuRjVit")
-                           
-    @api = PayPal::SDK::AdaptivePayments.new
-
-    @bid = Price.find(params[:id])
-    @work = @bid.work
-    @total = @bid.price.to_f
-    @percent = (@total * 0.05).round(2)
-    @total_new = (@total - @percent).round(2)
-    
-   # byebug
-    # Build request object
-    @pay = @api.build_pay({
-      :actionType => "CREATE",
-      :cancelUrl => "https://tile-riccione83.c9users.io/works/#{@work.id}/undo_pay",
-      :currencyCode => "EUR",
-      :feesPayer => "SENDER",
-      :ipnNotificationUrl => "https://tile-riccione83.c9users.io/works/#{@bid.id}/ipn_notify/#{current_user.id}",
-      :receiverList => {
-        :receiver => [{
-          :amount => @total_new,
-          :email =>  @bid.user.email },
-          {
-          :amount => @percent,
-          :email => "riccione83@me.com" }
-          ]
-      },
-      :returnUrl => "https://tile-riccione83.c9users.io/works/#{@bid.id}/pay/#{current_user.id}" })
-    
-    # Make API call & get response
-    @response = @api.pay(@pay)
-    
-    # Access response
-   # byebug
-    if @response.success? && @response.payment_exec_status != "ERROR"
-      @response.payKey
-      redirect_to @api.payment_url(@response)  # Url to complete payment
-    else
-      flash[:notice] = @response.error[0].message
-      redirect_to work_path(@work)
     end
   end
   

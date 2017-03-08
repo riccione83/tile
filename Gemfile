@@ -46,7 +46,6 @@ gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 gem 'aws-sdk', '~> 2.3.0'
 gem 'classifier-reborn'
 gem 'fast-stemmer'
-gem 'paypal-sdk-adaptivepayments'
 gem 'htmlcompressor'
 gem "cookie_alert"
 
