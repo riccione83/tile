@@ -16,7 +16,7 @@ class Picture < ActiveRecord::Base
   puts "**** USING AWS S3 STORAGE ****"
     has_attached_file :image,
     :styles => {
-    :large => "250x166>",
+    :large => "500x300>",
     :medium => "250x166>",
     :square => "250x166#", 
     :small => "250x166>" },

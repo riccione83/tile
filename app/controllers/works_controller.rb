@@ -163,6 +163,8 @@ class WorksController < ApplicationController
       if @work.update(work_params)
         
         if params[:images]
+          # FIrst delete all old pictures
+          @work.pictures.destroy_all
           # The magic is here ;)
           params[:images].each { |image|
             @work.pictures.create(image: image)
@@ -174,7 +176,7 @@ class WorksController < ApplicationController
           $work_classifier.new_train_data(@work.categories, ActionView::Base.full_sanitizer.sanitize(@work.description).delete!("\r\n\t") )
         end  
         
-        format.html { redirect_to @work, notice: '' }
+        format.html { redirect_to @work, notice: 'Annuncio modificato con successo.' }
         format.json { render :show, status: :ok, location: @work }
       else
         format.html { render :edit }

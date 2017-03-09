@@ -65,7 +65,7 @@
           <% else %>
             <div class="item imageThumbWorkShow"> 
           <% end %>
-                <img src="<%= picture.image.url %>" alt="..." class="imageThumbWorkShow">
+                <img src="<%= picture.image.url(:large) %>" alt="..." class="imageThumbWorkShow">
             </div>
           <% @count += 1 %>
         <% end %>
