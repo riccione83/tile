@@ -188,7 +188,7 @@ class WorksController < ApplicationController
   def destroy
     @work.destroy
     respond_to do |format|
-      format.html { redirect_to works_url, notice: '' }
+      format.html { redirect_to works_url, notice: 'Annuncio Eliminato.' }
       format.json { head :no_content }
     end
   end
