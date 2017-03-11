@@ -35,7 +35,7 @@ class Picture < ActiveRecord::Base
   do_not_validate_attachment_file_type :image
 
   def s3_credentials
-    {:bucket => "tiledev", :access_key_id => "AKIAJSWUZGXW7B5YO3IQ", :secret_access_key => "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"}
+    {:bucket => "tiledev", :access_key_id => "AKIAJFOHRW7W4AXYWVOA", :secret_access_key => "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"}
   end
 
   #after_attachment_post_process  :post_process_photo 
