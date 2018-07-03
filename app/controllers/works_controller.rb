@@ -58,8 +58,6 @@ class WorksController < ApplicationController
      end
   end
   
-  
-  
   # GET /works
   # GET /works.json
   def index
