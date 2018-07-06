@@ -47,6 +47,8 @@
   <% if current_user.id == @work.user_id %>
     <div class="actions">
       <%= f.submit "Aggiorna Annuncio",:class => "btn btn-primary" %>
+      
+      <%= link_to "Elimina Annuncio", { action: :destroy, id: @work.id }, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
     </div>
   <% end %>
   <% if @work.new_record? %>
