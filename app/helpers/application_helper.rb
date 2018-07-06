@@ -1,5 +1,4 @@
 module ApplicationHelper
-    include CookieAlert
     
     def flash_class(level)
         if level == "notice"

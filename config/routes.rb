@@ -12,8 +12,7 @@ Rails.application.routes.draw do
   resources :home
   resources :works
   resources :payments
-  
-  mount CookieAlert::Engine => "/cookie-alert"
+  resources :locales
   
   get 'home', :to => "home#homepage"
   post '/works/:id/new_bid', :to => "works#new_bid", :as => "new_bid"
@@ -31,5 +30,7 @@ Rails.application.routes.draw do
   get "/payments_in", :to => "payments#ricevuti", :as => :payment_in
   get "/payments_out", :to => "payments#inviati", :as => :payment_out
   get "/payments/done/:id/:user_id" => "payments#done", :as => :payment_done
+  
+  get "/locale/:locale", :to => "locales#set_locale", :as => :set_locale
 
 end

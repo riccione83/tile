@@ -1,23 +1,35 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+    learn_more: "Learn more"
+    ok: "OK"
+    project_name: "HelpMe"
+    welcome_message_splash: "Welcome on "
+    welcome_message_1: "Publish your request"
+    welcome_message_2: "Find your next customer"
+    welcome_message_3: "Close the business!"
+    welcome_message_4: "For Free."
+    login: "Login"
+    email: "Email"
+    password: "Password"
+    remember_me: "Remember me"
+    sign_up: "Sign up"
+    password_confirmation: "Password confirmation"  
+    new_request_text: "New request for you"
+    at_the_moment_text: "Now:"
+    make_offer_text: "Make an offer now!"
+    closed_offer: "Offer closed"
+    more: "More"
+    search_ads: "Search for ads"
+    find_text: "Find"
+    home_text: "Home"
+    near_you_text: "Near you"
+    categories: "Categories"    
+    new_ad: "New advertisement"
+    my_ads: "My advertisement"
+    ads_awarded: "Your adv awarded"
+    auct_awarded: "Auctions awarded"
+    logout_text: "Logout"
+    profile_of_text: "Profile of "
+    italian_text: "Italiano"
+    english_text: "English"    
+    cookies_eu:
+        cookies_text: "Cookies help us deliver our services. By using our services, you agree to our use of cookies."    

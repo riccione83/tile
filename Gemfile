@@ -34,20 +34,20 @@ gem 'bootstrap-sass'
 gem 'geocoder'
 gem 'gmaps4rails'
 gem 'carrierwave'
-gem 'fog', '1.23.0'
+gem 'fog'#, '1.23.0'
 gem 'mini_magick'
-gem 'will_paginate', '3.0.7'
-gem 'bootstrap-will_paginate', '0.0.10'
+gem 'will_paginate'#, '3.0.7'
+gem 'bootstrap-will_paginate'#, '0.0.10'
 gem 'net-ssh'
 gem 'devise'  #user
 gem 'ckeditor', github: 'galetahub/ckeditor' #for text editor
-gem 'truncate_html','0.3.2'
+gem 'truncate_html'#,'0.3.2'
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
-gem 'aws-sdk', '~> 2.3.0'
+gem 'aws-sdk'#, '~> 2.3.0'
 gem 'classifier-reborn'
 gem 'fast-stemmer'
 gem 'htmlcompressor'
-gem "cookie_alert"
+gem 'cookies_eu'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
